@@ -55,12 +55,55 @@ Copy all **three files** (`ffmpeg.exe`, `ffplay.exe`, and `ffprobe.exe`) into th
 
 ---
 
-## 🛠 Run via Python
+### 🐍 Run from source (Python)
 
-If you'd like to run the project from source:
+Make sure Python 3.9+ is installed.
 
-### 1. Clone the repo
+1. Clone the repo:
+   ```bash
+   git clone https://github.com/goatdotlol/Ascii-Media-Player
+   cd Ascii-Media-Player
+   ```
+
+2. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Run:
+   ```bash
+   python app.py
+   ```
+
+---
+
+### 📦 Requirements
+
+```
+numpy
+Pillow
+pygame
+mutagen
+colorama
+yt-dlp
+pyfiglet
+```
+
+Install with:
+
 ```bash
-git clone https://github.com/goatdotlol/ascii-media-player.git
-cd ascii-media-player
+pip install -r requirements.txt
+```
 
+---
+
+### 📫 Contact
+
+**Discord:** [`goat.lol`](https://discord.com/users/goat.lol)  
+GitHub: [@goat.lol](https://github.com/goatdotlol)
+
+---
+
+### 📄 License
+
+MIT License © 2025 [goat.lol](https://github.com/goatdotlol)
