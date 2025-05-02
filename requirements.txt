@@ -1,0 +1,7 @@
+numpy
+Pillow
+pygame
+mutagen
+colorama
+yt-dlp
+pyfiglet
