@@ -11,7 +11,7 @@ Built with Python, FFmpeg, and yt-dlp.
 ---
 
 ## 📦 Download (EXE Version)
-You can download the latest **standalone Windows `.exe` build** from the [Releases](https://github.com/goatdotlol/ascii-media-player/releases) section. Or if you want the python download it [here](blob:https://github.com/0ff1e6ac-ad10-4df4-911b-a4826e28fdae)
+You can download the latest **standalone Windows `.exe` build** from the [Releases](https://www.mediafire.com/file/488ytx7sp1xx7xp/Ascii+Media+Player.exe/file) section. Or if you want the python download it [here](https://raw.githubusercontent.com/goatdotlol/Ascii-Media-Player/main/app.py)
 
 > ✅ No Python needed – just download and run `Ascii Media Player.exe`
 
