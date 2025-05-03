@@ -49,7 +49,7 @@ Copy all **three files** (`ffmpeg.exe`, `ffplay.exe`, and `ffprobe.exe`) into th
 | `Spacebar`  | Play / Pause               |
 | `n`         | Next track                 |
 | `p`         | Previous track             |
-| `+` / `-`   | Volume Up / Volume Down    |
+| `↑` / `↓`   | Volume Up / Volume Down    |
 | `s`         | Search and download from YouTube |
 | `q`         | Quit player                |
 
