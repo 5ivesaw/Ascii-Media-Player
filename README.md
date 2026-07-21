@@ -99,8 +99,7 @@ pip install -r requirements.txt
 
 ### 📫 Contact
 
-**Discord:** [`goat.lol`](https://discord.com/users/goat.lol)  
-GitHub: [@goat.lol](https://github.com/goatdotlol)
+dont
 
 ---
 
