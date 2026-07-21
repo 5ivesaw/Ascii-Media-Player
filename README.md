@@ -105,4 +105,4 @@ dont
 
 ### 📄 License
 
-MIT License © 2025 [goat.lol](https://github.com/goatdotlol)
+MIT License © 2025 juihyioytigutgi7fevrii
