@@ -1,7 +1,7 @@
 'use strict';
 
 const config = window.ASCII_MEDIA_PLAYER_CONFIG || {
-  version: '2.2.0',
+  version: '2.2.1',
   repositoryUrl: 'https://github.com/5ivesaw/Ascii-Media-Player',
   siteUrl: 'https://5ivesaw.github.io/Ascii-Media-Player/'
 };
@@ -477,7 +477,7 @@ function applyConfig() {
   }
 
   const appVersion = $('#appVersion');
-  if (appVersion) appVersion.textContent = `VERSION ${config.version || '2.2.0'}`;
+  if (appVersion) appVersion.textContent = `VERSION ${config.version || '2.2.1'}`;
 
   document.title = 'ASCII Media Player — Local Audio Visualizer';
   window.__ASCII_SITE_URL__ = siteUrl;
@@ -830,7 +830,7 @@ updateRange(volume);
 updateRange(seek);
 
 const savedTheme = localStorage.getItem('amp-theme');
-if (['ice', 'matrix', 'amber', 'mono'].includes(savedTheme)) themeSelect.value = savedTheme;
+if (['saw', 'whitecut', 'signal', 'terminal'].includes(savedTheme)) themeSelect.value = savedTheme;
 document.body.dataset.theme = themeSelect.value;
 
 const savedMode = localStorage.getItem('amp-mode');

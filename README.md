@@ -1,4 +1,6 @@
 <p align="center">
+
+> **v2.2.1 FiveSaw Edition** introduces the original red, white and black FiveSaw/FiveCut visual system across the website, PWA and Android shell, and fixes the Android release compiler errors.
   <a href="https://5ivesaw.github.io/Ascii-Media-Player/">
     <img src="docs/assets/logo.svg" width="96" alt="ASCII Media Player logo">
   </a>
@@ -70,7 +72,7 @@ Latest release: https://github.com/5ivesaw/Ascii-Media-Player/releases/latest
 Download the latest `Windows-x64.exe` asset and run it from Windows Terminal:
 
 ```powershell
-.\ASCII-Media-Player-v2.2.0-Windows-x64.exe "C:\Music"
+.\ASCII-Media-Player-v2.2.1-Windows-x64.exe "C:\Music"
 ```
 
 PowerShell installer:
@@ -166,7 +168,7 @@ python app.py --convert-only "/path/to/music"
 
 ## Release system
 
-`.github/workflows/release.yml` runs when a tag such as `v2.2.0` is pushed. Each desktop build runs on its actual target operating system because PyInstaller is not a cross-compiler.
+`.github/workflows/release.yml` runs when a tag such as `v2.2.1` is pushed. Each desktop build runs on its actual target operating system because PyInstaller is not a cross-compiler.
 
 The workflow performs these jobs:
 

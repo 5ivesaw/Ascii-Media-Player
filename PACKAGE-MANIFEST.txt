@@ -1,0 +1,35 @@
+ASCII Media Player v2.2.1 — FiveSaw Edition
+
+RELEASE TARGETS
+- Windows x64 standalone EXE and ZIP
+- Linux x64 binary and tar.gz
+- Linux ARM64 binary and tar.gz
+- Android signed APK
+- macOS Apple Silicon ZIP
+- macOS Intel ZIP
+- Source ZIP, installers, and SHA256SUMS.txt
+
+ANDROID CORRECTIONS
+- WebSettings.setSafeBrowsingEnabled(true)
+- applyImmersiveMode(boolean) helper avoids Activity method collision
+- Android SDK API 36 / Build Tools 36.0.0 setup action
+- Persistent repository signing-key workflow
+
+FIVESAW IDENTITY
+- Red: #cf1738
+- Near black: #111318
+- Off-white: #f5f5f2
+- Support gray: #555961
+- Motorsport race plates, italic 05 numerals, speed wedges, diagonal striping,
+  saw-tooth rails, monospaced metadata, and BUILD / BREAK / REPEAT language
+
+VALIDATION COMPLETED
+- Project validator
+- Python syntax
+- JavaScript syntax
+- Shell syntax
+- JSON parsing
+- XML/SVG parsing
+- PNG dimensions
+- HTML local asset resolution
+- Static verification of both reported Android Java compiler fixes

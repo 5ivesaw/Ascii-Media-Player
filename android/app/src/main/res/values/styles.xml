@@ -7,7 +7,7 @@
         <item name="android:statusBarColor">@color/amp_surface</item>
         <item name="android:navigationBarColor">@color/amp_background</item>
         <item name="android:windowBackground">@color/amp_background</item>
-        <item name="android:colorAccent">#62E6FF</item>
+        <item name="android:colorAccent">#F2173A</item>
         <item name="android:fontFamily">sans</item>
     </style>
 </resources>

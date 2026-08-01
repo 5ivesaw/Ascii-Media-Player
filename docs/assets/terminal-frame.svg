@@ -1,56 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 590" role="img" aria-labelledby="title desc">
-  <title id="title">ASCII Media Player terminal interface</title>
-  <desc id="desc">A dark terminal window showing a cyan ASCII spectrum and playback information.</desc>
-  <defs>
-    <linearGradient id="frame" x1="0" y1="0" x2="1200" y2="590" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#111f2d"/>
-      <stop offset="1" stop-color="#081019"/>
-    </linearGradient>
-    <linearGradient id="accent" x1="210" y1="170" x2="1000" y2="470" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#c9f4ff"/>
-      <stop offset=".5" stop-color="#70d8ff"/>
-      <stop offset="1" stop-color="#718dff"/>
-    </linearGradient>
-    <filter id="shadow" x="-20%" y="-30%" width="140%" height="160%">
-      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#000" flood-opacity=".45"/>
-    </filter>
-    <filter id="glow" x="-20%" y="-80%" width="140%" height="260%">
-      <feGaussianBlur stdDeviation="7" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <rect width="1200" height="590" rx="34" fill="#05090d"/>
-  <g filter="url(#shadow)">
-    <rect x="40" y="38" width="1120" height="514" rx="24" fill="url(#frame)" stroke="#284157" stroke-width="2"/>
-    <path d="M40 100h1120" stroke="#284157"/>
-    <circle cx="78" cy="69" r="7" fill="#182b3b" stroke="#4b687d"/>
-    <circle cx="102" cy="69" r="7" fill="#182b3b" stroke="#4b687d"/>
-    <circle cx="126" cy="69" r="7" fill="#182b3b" stroke="#4b687d"/>
-    <text x="600" y="74" text-anchor="middle" fill="#6f8799" font-family="ui-monospace, monospace" font-size="14" letter-spacing="2">ASCII MEDIA PLAYER / LIVE SIGNAL</text>
-    <text x="1098" y="74" text-anchor="end" fill="#64e6b3" font-family="ui-monospace, monospace" font-size="12">PLAYING</text>
-  </g>
-  <g font-family="ui-monospace, monospace">
-    <text x="78" y="139" fill="#70d8ff" font-size="13" letter-spacing="2">NOW PLAYING</text>
-    <text x="78" y="166" fill="#eef7ff" font-size="21" font-weight="700">Midnight Signal.flac</text>
-    <text x="78" y="191" fill="#70889b" font-size="12">03 / 12 · FLAC · LOCAL CACHE READY</text>
-  </g>
-  <rect x="76" y="220" width="1048" height="244" rx="14" fill="#03080c" stroke="#1d3a4e"/>
-  <g opacity=".16" stroke="#70d8ff">
-    <path d="M76 260h1048M76 300h1048M76 340h1048M76 380h1048M76 420h1048"/>
-    <path d="M156 220v244M236 220v244M316 220v244M396 220v244M476 220v244M556 220v244M636 220v244M716 220v244M796 220v244M876 220v244M956 220v244M1036 220v244"/>
-  </g>
-  <g fill="url(#accent)" filter="url(#glow)" opacity=".95">
-    <path d="M94 436v-18h12v18h-12Zm18 0v-34h12v34h-12Zm18 0v-52h12v52h-12Zm18 0v-82h12v82h-12Zm18 0v-62h12v62h-12Zm18 0v-104h12v104h-12Zm18 0v-146h12v146h-12Zm18 0v-112h12v112h-12Zm18 0v-168h12v168h-12Zm18 0v-132h12v132h-12Zm18 0v-96h12v96h-12Zm18 0v-64h12v64h-12Zm18 0v-88h12v88h-12Zm18 0v-126h12v126h-12Zm18 0v-184h12v184h-12Zm18 0v-212h12v212h-12Zm18 0v-176h12v176h-12Zm18 0v-136h12v136h-12Zm18 0v-104h12v104h-12Zm18 0v-82h12v82h-12Zm18 0v-118h12v118h-12Zm18 0v-154h12v154h-12Zm18 0v-194h12v194h-12Zm18 0v-220h12v220h-12Zm18 0v-178h12v178h-12Zm18 0v-148h12v148h-12Zm18 0v-108h12v108h-12Zm18 0v-76h12v76h-12Zm18 0v-96h12v96h-12Zm18 0v-134h12v134h-12Zm18 0v-174h12v174h-12Zm18 0v-202h12v202h-12Zm18 0v-166h12v166h-12Zm18 0v-124h12v124h-12Zm18 0v-92h12v92h-12Zm18 0v-60h12v60h-12Zm18 0v-84h12v84h-12Zm18 0v-116h12v116h-12Zm18 0v-158h12v158h-12Zm18 0v-188h12v188h-12Zm18 0v-142h12v142h-12Zm18 0v-110h12v110h-12Zm18 0v-80h12v80h-12Zm18 0v-54h12v54h-12Zm18 0v-72h12v72h-12Zm18 0v-96h12v96h-12Zm18 0v-126h12v126h-12Zm18 0v-96h12v96h-12Zm18 0v-64h12v64h-12Zm18 0v-42h12v42h-12"/>
-  </g>
-  <g font-family="ui-monospace, monospace" font-size="12">
-    <text x="78" y="506" fill="#6f8799">01:42</text>
-    <rect x="128" y="497" width="858" height="4" rx="2" fill="#1e3445"/>
-    <rect x="128" y="497" width="386" height="4" rx="2" fill="#70d8ff"/>
-    <circle cx="514" cy="499" r="6" fill="#c9f4ff"/>
-    <text x="1028" y="506" fill="#6f8799">04:03</text>
-    <text x="78" y="530" fill="#70d8ff">SPACE</text><text x="127" y="530" fill="#6f8799">pause</text>
-    <text x="205" y="530" fill="#70d8ff">N/P</text><text x="240" y="530" fill="#6f8799">track</text>
-    <text x="312" y="530" fill="#70d8ff">ARROWS</text><text x="373" y="530" fill="#6f8799">seek / volume</text>
-    <text x="1042" y="530" fill="#64e6b3">VOL 75%</text>
-  </g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700">
+<rect x="2" y="2" width="1196" height="696" fill="#111318" stroke="#f5f5f2" stroke-width="4"/>
+<path d="M2 2h1196v66H2z" fill="#cf1738"/>
+<path d="M0 628h118l70 70H0zM1200 0v122l-70-70V0z" fill="#cf1738"/>
+<path d="M820 68h380v9H811zM900 87h300v4H896z" fill="#f5f5f2" opacity=".8"/>
+<g stroke="#555961" stroke-width="2" opacity=".55"><path d="M70 112h1060M70 590h1060"/><path d="M80 142v420M1120 142v420"/></g>
+<g fill="#cf1738"><path d="M0 614h18l-9 14zM24 614h18l-9 14zM48 614h18l-9 14zM72 614h18l-9 14z"/></g>
+<text x="1010" y="650" fill="#f5f5f2" font-family="Arial Black,Impact,sans-serif" font-size="72" font-style="italic" font-weight="900">05</text>
 </svg>

@@ -1,7 +1,7 @@
 'use strict';
 
 const CACHE_PREFIX = 'ascii-media-player';
-const CACHE_VERSION = '2.1.0';
+const CACHE_VERSION = '2.2.1';
 const STATIC_CACHE = `${CACHE_PREFIX}-static-${CACHE_VERSION}`;
 const RUNTIME_CACHE = `${CACHE_PREFIX}-runtime-${CACHE_VERSION}`;
 

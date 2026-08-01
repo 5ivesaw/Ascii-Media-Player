@@ -52,7 +52,7 @@ def parse_repository(value: str) -> tuple[str, str]:
 
 owner, repository = parse_repository(remote)
 version_match = re.search(r'^APP_VERSION\s*=\s*[\"\']([^\"\']+)', (root / 'app.py').read_text(encoding='utf-8'), flags=re.MULTILINE)
-version = version_match.group(1) if version_match else '2.2.0'
+version = version_match.group(1) if version_match else '2.2.1'
 repo_url = f'https://github.com/{owner}/{repository}'
 if requested_site:
     site_url = requested_site.rstrip('/') + '/'

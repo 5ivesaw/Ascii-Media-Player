@@ -1,16 +1,24 @@
 {
   "id": "./",
-  "name": "ASCII Media Player",
-  "short_name": "ASCII Player",
-  "description": "Play local audio through a real-time ASCII spectrum. No upload and no account required.",
+  "name": "ASCII Media Player \u2014 FiveSaw Edition",
+  "short_name": "FiveSaw ASCII",
+  "description": "FiveSaw local-first audio player with live ASCII spectrum and waveform visualization.",
   "start_url": "./?source=pwa",
   "scope": "./",
   "display": "standalone",
-  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
-  "background_color": "#05090d",
-  "theme_color": "#071018",
+  "display_override": [
+    "window-controls-overlay",
+    "standalone",
+    "minimal-ui"
+  ],
+  "background_color": "#111318",
+  "theme_color": "#cf1738",
   "orientation": "any",
-  "categories": ["music", "entertainment", "utilities"],
+  "categories": [
+    "music",
+    "entertainment",
+    "utilities"
+  ],
   "icons": [
     {
       "src": "assets/icon-192.png",
@@ -43,7 +51,13 @@
       "short_name": "Player",
       "description": "Open the local ASCII audio player",
       "url": "./#player",
-      "icons": [{"src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png"}]
+      "icons": [
+        {
+          "src": "assets/icon-192.png",
+          "sizes": "192x192",
+          "type": "image/png"
+        }
+      ]
     }
   ]
 }

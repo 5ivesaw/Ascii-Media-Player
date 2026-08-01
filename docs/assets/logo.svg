@@ -1,21 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
-  <title id="title">ASCII Media Player</title>
-  <desc id="desc">A geometric A formed around an audio waveform.</desc>
-  <defs>
-    <linearGradient id="g" x1="18" y1="14" x2="110" y2="114" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#c9f4ff"/>
-      <stop offset=".46" stop-color="#70d8ff"/>
-      <stop offset="1" stop-color="#718dff"/>
-    </linearGradient>
-    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="4" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-  </defs>
-  <rect x="5" y="5" width="118" height="118" rx="28" fill="#071018" stroke="#203648" stroke-width="2"/>
-  <path d="M31 96 56 31h16l25 65H82l-5.8-16H51.6L46 96H31Zm25.6-29h14.8L64 45.8 56.6 67Z" fill="url(#g)"/>
-  <g fill="none" stroke="#70d8ff" stroke-linecap="round" filter="url(#glow)">
-    <path d="M22 67h7l4-12 6 25 6-18 6 8 5-3h16l5-12 6 25 6-18 6 8 5-3h6" stroke-width="3"/>
-  </g>
-  <circle cx="106" cy="27" r="4" fill="#64e6b3"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="t d">
+<title id="t">FiveSaw ASCII Media Player</title><desc id="d">FiveSaw race plate mark with a cut signal and number 05.</desc>
+<rect width="64" height="64" fill="#111318"/>
+<path d="M0 0h64v11H47L38 20H0zM0 53h17l9-9h38v20H0z" fill="#cf1738"/>
+<path d="M7 16h38l10 10-8 8H29l-5 5h31v9H12L3 39l10-10h19l5-5H7z" fill="#f5f5f2"/>
+<path d="M29 16h10l-7 18H22z" fill="#cf1738"/>
+<g fill="#f5f5f2"><path d="M4 55h5l-2.5 5zM12 55h5l-2.5 5zM20 55h5l-2.5 5z"/></g>
+<text x="45" y="60" fill="#f5f5f2" font-family="Arial Black,Impact,sans-serif" font-size="10" font-style="italic" font-weight="900">05</text>
 </svg>

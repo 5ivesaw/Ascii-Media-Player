@@ -34,7 +34,7 @@ def main() -> int:
         print(current())
         return 0
     if not args.version or not SEMVER.fullmatch(args.version):
-        raise SystemExit('Provide a semantic version such as 2.2.0')
+        raise SystemExit('Provide a semantic version such as 2.2.1')
     version = args.version
     major, minor, patch = map(int, version.split('.'))
     version_code = major * 1_000_000 + minor * 1_000 + patch

@@ -41,7 +41,7 @@ else
 fi
 git pull --ff-only origin main
 
-say "Applying the cross-platform v2.2 release upgrade"
+say "Applying the FiveSaw v2.2.1 release upgrade"
 find . -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
 (
   cd "$SOURCE_DIR"
@@ -124,9 +124,9 @@ HEAD_SHA="$(git rev-parse HEAD)"
 
 say "Enabling GitHub Pages and setting the repository website"
 if gh api "repos/$SLUG/pages" >/dev/null 2>&1; then
-  printf '%s' '{"build_type":"workflow","https_enforced":true}' | gh api --method PUT "repos/$SLUG/pages" --input - >/dev/null || true
+  printf '%s' '{"build_type":"workflow"}' | gh api --method PUT "repos/$SLUG/pages" --input - >/dev/null 2>&1 || true
 else
-  printf '%s' '{"build_type":"workflow"}' | gh api --method POST "repos/$SLUG/pages" --input - >/dev/null || true
+  printf '%s' '{"build_type":"workflow"}' | gh api --method POST "repos/$SLUG/pages" --input - >/dev/null 2>&1 || true
 fi
 gh api --method PATCH "repos/$SLUG" \
   -f homepage="$SITE_URL" \
@@ -149,7 +149,12 @@ say "Waiting for the release workflow"
 sleep 6
 RUN_ID="$(gh run list --repo "$SLUG" --workflow release.yml --limit 8 --json databaseId,headBranch,event --jq '.[] | select(.headBranch == "'"$TAG"'" or .event == "workflow_dispatch") | .databaseId' | head -n 1)"
 if [[ -n "$RUN_ID" && "$RUN_ID" != "null" ]]; then
-  gh run watch "$RUN_ID" --repo "$SLUG" --exit-status
+  if ! gh run watch "$RUN_ID" --repo "$SLUG" --exit-status; then
+    echo
+    echo "Release build failed. Showing failed job logs:"
+    gh run view "$RUN_ID" --repo "$SLUG" --log-failed || true
+    exit 1
+  fi
 else
   echo "The run has not appeared yet. Open: https://github.com/$SLUG/actions/workflows/release.yml"
 fi

@@ -35,11 +35,11 @@ public final class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setStatusBarColor(Color.rgb(7, 16, 24));
-        getWindow().setNavigationBarColor(Color.rgb(5, 9, 13));
+        getWindow().setStatusBarColor(Color.rgb(207, 23, 56));
+        getWindow().setNavigationBarColor(Color.rgb(17, 19, 24));
 
         root = new FrameLayout(this);
-        root.setBackgroundColor(Color.rgb(5, 9, 13));
+        root.setBackgroundColor(Color.rgb(17, 19, 24));
         setContentView(root);
 
         webView = new WebView(this);
@@ -68,7 +68,7 @@ public final class MainActivity extends Activity {
         settings.setUseWideViewPort(true);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            WebView.setSafeBrowsingEnabled(true);
+            settings.setSafeBrowsingEnabled(true);
         }
 
         webView.setWebViewClient(new WebViewClient() {
@@ -129,7 +129,7 @@ public final class MainActivity extends Activity {
                     ViewGroup.LayoutParams.MATCH_PARENT,
                     ViewGroup.LayoutParams.MATCH_PARENT
                 ));
-                setImmersive(true);
+                applyImmersiveMode(true);
             }
 
             @Override
@@ -184,14 +184,14 @@ public final class MainActivity extends Activity {
         root.removeView(customView);
         customView = null;
         webView.setVisibility(View.VISIBLE);
-        setImmersive(false);
+        applyImmersiveMode(false);
         if (customViewCallback != null) {
             customViewCallback.onCustomViewHidden();
             customViewCallback = null;
         }
     }
 
-    private void setImmersive(boolean enabled) {
+    private void applyImmersiveMode(boolean enabled) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             WindowInsetsController controller = getWindow().getInsetsController();
             if (controller != null) {

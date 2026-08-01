@@ -1,0 +1,5 @@
+Download the v2.2.1 ZIP into Android Downloads, extract it, then run:
+
+  bash push_fivesaw_v221_upgrade.sh
+
+The publisher validates the source, pushes main, configures GitHub Pages, stores Android signing secrets, creates tag v2.2.1, waits for all platform jobs, and prints failed logs when a job fails.

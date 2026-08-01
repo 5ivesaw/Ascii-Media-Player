@@ -3,9 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#071018">
+  <meta name="theme-color" content="#cf1738">
   <meta name="color-scheme" content="dark">
-  <meta name="description" content="Play local audio through a real-time ASCII spectrum. No uploads, no account, and available as Windows, Linux, Android, and macOS downloads.">
+  <meta name="description" content="FiveSaw ASCII Media Player turns local audio into a live text signal. No upload, no account, with Windows, Linux, Android, macOS, and web releases.">
   <meta name="application-name" content="ASCII Media Player">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -13,21 +13,21 @@
   <meta name="robots" content="index,follow">
   <meta property="og:type" content="website">
   <meta property="og:title" content="ASCII Media Player">
-  <meta property="og:description" content="A local-first audio player with a live ASCII spectrum and an installable offline web app and native release downloads.">
+  <meta property="og:description" content="The FiveSaw local-first audio player: live ASCII spectrum, offline web app, and native releases for every supported platform.">
   <meta property="og:url" content="https://5ivesaw.github.io/Ascii-Media-Player/" data-managed-site-url>
   <meta property="og:image" content="https://5ivesaw.github.io/Ascii-Media-Player/assets/og-card.png" data-managed-og-image>
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="ASCII Media Player">
-  <meta name="twitter:description" content="Local audio. Live ASCII. Zero upload.">
+  <meta name="twitter:description" content="FiveSaw signal system. Local audio. Live ASCII. Zero upload.">
   <link rel="canonical" href="https://5ivesaw.github.io/Ascii-Media-Player/" data-managed-site-url>
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
   <link rel="icon" href="assets/icon-192.png" sizes="192x192" type="image/png">
   <link rel="apple-touch-icon" href="assets/icon-192.png">
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="styles.css">
-  <title>ASCII Media Player — Local Audio Visualizer</title>
+  <title>ASCII Media Player — FiveSaw Signal System</title>
 </head>
-<body data-theme="ice">
+<body data-theme="saw">
   <a class="skip-link" href="#player">Skip to player</a>
   <div class="ambient ambient-one" aria-hidden="true"></div>
   <div class="ambient ambient-two" aria-hidden="true"></div>
@@ -38,8 +38,8 @@
       <a class="brand" href="#top" aria-label="ASCII Media Player home">
         <img src="assets/logo.svg" width="42" height="42" alt="">
         <span class="brand-copy">
-          <strong>ASCII MEDIA PLAYER</strong>
-          <small>LOCAL SIGNAL ENGINE</small>
+          <strong>FIVE<span>//</span>SAW ASCII</strong>
+          <small>FIVECUT SIGNAL SYSTEM</small>
         </span>
       </a>
       <button class="menu-toggle" id="menuToggle" type="button" aria-expanded="false" aria-controls="siteNav">Menu</button>
@@ -49,7 +49,7 @@
         <a href="#platforms">Platforms</a>
         <a href="#downloads">Downloads</a>
         <a href="#install">Source</a>
-        <a class="nav-source" href="https://github.com/5ivesaw/Ascii-Media-Player" data-repo-link>Source</a>
+        <a class="nav-source" href="https://github.com/5ivesaw/Ascii-Media-Player" data-repo-link>GitHub</a>
       </nav>
     </div>
   </header>
@@ -57,56 +57,57 @@
   <main>
     <section class="hero shell" aria-labelledby="heroTitle">
       <div class="hero-copy reveal">
-        <div class="status-pill"><span></span> Browser player online</div>
-        <p class="eyebrow">LOCAL AUDIO / LIVE ASCII / ZERO ACCOUNT</p>
-        <h1 id="heroTitle">Hear the track.<br><span>Read the signal.</span></h1>
-        <p class="hero-lede">A cross-platform media player that transforms local music into a responsive text spectrum. Use the packaged Windows EXE, Linux binaries, native Android APK, macOS builds, or the installable browser edition.</p>
+        <div class="status-pill"><span></span> BUILD 2.2.1 / SIGNAL ONLINE</div>
+        <p class="eyebrow">FIVE//SAW AUDIO DIVISION · SYSTEM 05</p>
+        <h1 id="heroTitle">CUT THROUGH<br><span>THE SIGNAL.</span></h1>
+        <p class="hero-lede">A hard-edged, local-first player built in the original FiveSaw visual language. Drop in a track, watch it become live ASCII, then use the same project on Windows, Linux, Android, macOS, or the browser.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#player">Launch web player</a>
-          <a class="button secondary" id="heroDownload" href="https://github.com/5ivesaw/Ascii-Media-Player/releases/latest" data-release-link>Download latest build</a>
+          <a class="button primary" href="#player">Open the player</a>
+          <a class="button secondary" id="heroDownload" href="https://github.com/5ivesaw/Ascii-Media-Player/releases/latest" data-release-link>Get the latest release</a>
         </div>
         <dl class="hero-facts" aria-label="Project facts">
-          <div><dt>LOCAL</dt><dd>Files stay on this device</dd></div>
-          <div><dt>OFFLINE</dt><dd>Installable PWA shell</dd></div>
-          <div><dt>OPEN</dt><dd>MIT licensed source</dd></div>
+          <div><dt>NO CLOUD</dt><dd>Your tracks stay on-device</dd></div>
+          <div><dt>NO LOCK-IN</dt><dd>Web, APK, EXE and native builds</dd></div>
+          <div><dt>OPEN CORE</dt><dd>MIT licensed and inspectable</dd></div>
         </dl>
       </div>
 
       <div class="hero-visual reveal" aria-label="Animated ASCII signal preview">
+        <div class="race-plate" aria-hidden="true"><span>05</span><small>FIVE//SAW</small></div>
         <div class="hero-terminal">
           <div class="terminal-titlebar">
             <div class="window-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-            <span>amp://signal-monitor</span>
-            <span>v2.2</span>
+            <span>fivecut://signal-monitor</span>
+            <span>v2.2.1</span>
           </div>
           <pre id="heroSignal" aria-hidden="true"></pre>
-          <div class="terminal-footer"><span>INPUT: LOCAL</span><span>FFT: 2048</span><span>STATE: READY</span></div>
+          <div class="terminal-footer"><span>INPUT / LOCAL</span><span>ENGINE / FFT 2048</span><span>FIVE//SAW / READY</span></div>
         </div>
       </div>
     </section>
 
     <section class="trust-strip" aria-label="Technology summary">
       <div class="shell trust-grid">
-        <span>WEB AUDIO API</span>
-        <span>PYTHON + PYGAME</span>
-        <span>FFMPEG CONVERSION</span>
-        <span>PROGRESSIVE WEB APP</span>
-        <span>AUTOMATED RELEASES</span>
+        <span>BUILD / BREAK / REPEAT</span>
+        <span>FIVESAW // ONLINE</span>
+        <span>GITHUB.COM/5IVESAW</span>
+        <span>SYSTEM 05 / LOCAL SIGNAL</span>
+        <span>WEB / APK / EXE / NATIVE</span>
       </div>
     </section>
 
     <section class="player-section shell" id="player" aria-labelledby="playerTitle">
       <div class="section-heading reveal">
-        <p class="eyebrow">INTERACTIVE PLAYER</p>
-        <h2 id="playerTitle">Your files become the interface</h2>
-        <p>Select multiple tracks or drop them onto the player. Audio decoding, playback, and analysis happen locally in your browser.</p>
+        <p class="eyebrow">01 / LIVE PLAYER</p>
+        <h2 id="playerTitle">The waveform gets cut into text.</h2>
+        <p>Queue local tracks, switch between spectrum and waveform modes, and control the entire signal without sending a byte to a server.</p>
       </div>
 
       <div class="app-frame reveal" id="dropZone">
         <div class="app-topbar">
           <div class="app-identity">
             <img src="assets/logo.svg" width="28" height="28" alt="">
-            <div><strong>ASCII PLAYER</strong><small id="appVersion">VERSION 2.2.0</small></div>
+            <div><strong>FIVE//SAW ASCII</strong><small id="appVersion">VERSION 2.2.1</small></div>
           </div>
           <div class="app-status"><span class="status-light" id="statusLight"></span><span id="signalStatus">IDLE</span></div>
         </div>
@@ -141,9 +142,9 @@
             <div class="ascii-stage" id="asciiStage">
               <pre id="asciiScreen" aria-label="Live ASCII audio visualization">                                                                                  
                                                                                   
-                              DROP AUDIO TO BEGIN                                 
+                              CUT AUDIO INTO SIGNAL                                 
                                                                                   
-                     LOCAL FILES NEVER LEAVE THIS DEVICE                          
+                     DROP LOCAL AUDIO / NOTHING UPLOADS                          
                                                                                   
                                                                                   </pre>
               <div class="scanline" aria-hidden="true"></div>
@@ -185,10 +186,10 @@
               <label>
                 <span>THEME</span>
                 <select id="themeSelect" aria-label="Color theme">
-                  <option value="ice">Ice</option>
-                  <option value="matrix">Matrix</option>
-                  <option value="amber">Amber</option>
-                  <option value="mono">Mono</option>
+                  <option value="saw" selected>FiveSaw Red</option>
+                  <option value="whitecut">White Cut</option>
+                  <option value="signal">Night Signal</option>
+                  <option value="terminal">Terminal</option>
                 </select>
               </label>
               <label class="volume-control">
@@ -217,8 +218,8 @@
 
     <section class="feature-section shell" id="features" aria-labelledby="featuresTitle">
       <div class="section-heading reveal">
-        <p class="eyebrow">DESIGNED FOR THE SIGNAL</p>
-        <h2 id="featuresTitle">A real player, not a decorative mockup</h2>
+        <p class="eyebrow">02 / BUILT, NOT FAKED</p>
+        <h2 id="featuresTitle">A complete player behind the visual system.</h2>
         <p>The website and terminal application share the same local-first idea while using the strengths of each platform.</p>
       </div>
       <div class="feature-grid">
@@ -233,8 +234,8 @@
 
     <section class="platform-section shell" id="platforms" aria-labelledby="platformsTitle">
       <div class="section-heading reveal">
-        <p class="eyebrow">FOUR PLATFORMS / ONE RELEASE</p>
-        <h2 id="platformsTitle">Use the build made for the device</h2>
+        <p class="eyebrow">03 / RELEASE MATRIX</p>
+        <h2 id="platformsTitle">One source. Native artifacts for every target.</h2>
         <p>The release system builds on each operating system instead of pretending one executable is portable everywhere.</p>
       </div>
       <div class="platform-grid">
@@ -247,8 +248,8 @@
 
     <section class="download-section shell" id="downloads" aria-labelledby="downloadsTitle">
       <div class="section-heading reveal">
-        <p class="eyebrow">GITHUB RELEASES</p>
-        <h2 id="downloadsTitle">One version. Every supported build.</h2>
+        <p class="eyebrow">04 / DOWNLOAD GRID</p>
+        <h2 id="downloadsTitle">Take the right cut for your machine.</h2>
         <p id="latestReleaseLabel">Checking the latest published release and matching it to this device.</p>
       </div>
 
@@ -295,8 +296,8 @@
     <section class="install-section shell" id="install" aria-labelledby="installTitle">
       <div class="install-card reveal">
         <div class="install-copy">
-          <p class="eyebrow">SOURCE INSTALLATION</p>
-          <h2 id="installTitle">Build it, inspect it, change it.</h2>
+          <p class="eyebrow">05 / OPEN SOURCE</p>
+          <h2 id="installTitle">Own the code. Change the system.</h2>
           <p>Packaged releases require no Python installation. The source route remains available for development, customization, and direct execution.</p>
           <a class="text-link" href="https://github.com/5ivesaw/Ascii-Media-Player#desktop-installation" data-repo-install-link>Read full installation guide</a>
         </div>
@@ -313,16 +314,17 @@ python app.py "/path/to/music"</code></pre>
     <section class="privacy-section shell" aria-labelledby="privacyTitle">
       <div class="privacy-card reveal">
         <div class="privacy-mark">LOCAL</div>
-        <div><p class="eyebrow">PRIVACY BY ARCHITECTURE</p><h2 id="privacyTitle">Your music does not cross the network</h2><p>The web player creates temporary local object URLs and connects them to the browser's audio analyser. There is no media upload service, account database, telemetry SDK, or advertising code.</p></div>
+        <div><p class="eyebrow">06 / LOCAL BY DESIGN</p><h2 id="privacyTitle">Your music never enters somebody else's machine.</h2><p>The web player creates temporary local object URLs and connects them to the browser's audio analyser. There is no media upload service, account database, telemetry SDK, or advertising code.</p></div>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <div class="shell footer-grid">
-      <div class="footer-brand"><img src="assets/wordmark.svg" alt="ASCII Media Player" height="34"><p>Local audio rendered as text.</p></div>
+      <div class="footer-brand"><img src="assets/wordmark.svg" alt="ASCII Media Player" height="34"><p>Original FiveSaw signal system. Local audio rendered as text.</p></div>
       <div class="footer-links"><a href="#player">Player</a><a href="#downloads">Downloads</a><a href="#install">Source</a><a href="https://github.com/5ivesaw/Ascii-Media-Player" data-repo-link>Repository</a><a href="https://github.com/5ivesaw/Ascii-Media-Player/issues" data-issues-link>Issues</a></div>
-      <p class="footer-meta">MIT License · Version 2.2.0 · <span id="year"></span></p>
+      <p class="footer-meta">MIT License · FiveSaw Edition · Version 2.2.1 · <span id="year"></span></p>
+      <div class="footer-rail" aria-hidden="true"><span>BUILD / BREAK / REPEAT</span><span>FIVESAW // ONLINE</span><span>05</span></div>
     </div>
   </footer>
 

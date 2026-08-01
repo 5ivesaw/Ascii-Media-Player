@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       tag:
-        description: Existing version tag to rebuild, for example v2.2.0
+        description: Existing version tag to rebuild, for example v2.2.1
         required: true
         type: string
 
@@ -235,9 +235,9 @@ jobs:
         run: |
           VERSION="$(python3 scripts/set-version.py --print)"
           cat > release-notes.md <<EOF
-          # ASCII Media Player v$VERSION
+          # ASCII Media Player v$VERSION — FiveSaw Edition
 
-          Cross-platform release generated from one version tag.
+          Cross-platform FiveSaw release generated from one version tag.
 
           ## Downloads
 
