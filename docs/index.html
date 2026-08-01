@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#070a0f">
+  <meta name="description" content="ASCII Media Player is a local-first terminal and browser audio player with live ASCII visualization.">
+  <title>ASCII Media Player</title>
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="noise" aria-hidden="true"></div>
+  <header class="site-header shell">
+    <a class="brand" href="#top" aria-label="ASCII Media Player home">
+      <img src="assets/logo.svg" alt="" width="36" height="36">
+      <span>ASCII MEDIA PLAYER</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="#player">Web player</a>
+      <a href="#platforms">Platforms</a>
+      <a href="#install">Install</a>
+      <a class="nav-cta" href="https://github.com/5ivesaw/Ascii-Media-Player">Source</a>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="hero shell">
+      <div class="hero-copy">
+        <p class="eyebrow">LOCAL AUDIO / TERMINAL VISUALS / ZERO ACCOUNT</p>
+        <h1>Hear the track.<br><span>See the signal.</span></h1>
+        <p class="lede">A cross-platform media player that turns local audio into a live ASCII spectrum. Run it in a terminal on Windows and Linux, or install the browser edition on Android.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#player">Open web player</a>
+          <a class="button secondary" href="#install">Run from source</a>
+        </div>
+        <dl class="hero-stats" aria-label="Project facts">
+          <div><dt>LOCAL</dt><dd>Files stay on-device</dd></div>
+          <div><dt>OFFLINE</dt><dd>PWA cache included</dd></div>
+          <div><dt>OPEN</dt><dd>MIT licensed</dd></div>
+        </dl>
+      </div>
+      <div class="hero-art" aria-hidden="true">
+        <img src="assets/terminal-frame.svg" alt="">
+      </div>
+    </section>
+
+    <section id="player" class="player-section shell">
+      <div class="section-heading">
+        <p class="eyebrow">INTERACTIVE PREVIEW</p>
+        <h2>Run the visualizer in your browser</h2>
+        <p>Select or drop an audio file. Playback and spectrum analysis happen entirely on this device.</p>
+      </div>
+
+      <div class="player-card" id="dropZone">
+        <div class="player-topbar">
+          <div class="window-controls" aria-hidden="true"><span></span><span></span><span></span></div>
+          <p id="trackLabel">NO TRACK LOADED</p>
+          <p class="signal-status" id="signalStatus">IDLE</p>
+        </div>
+
+        <div class="ascii-wrap">
+          <pre id="asciiScreen" aria-label="Live ASCII audio spectrum">                                                                                  
+                                                                                  
+                              DROP AUDIO TO BEGIN                                 
+                                                                                  
+                         MP3 / WAV / OGG / FLAC / M4A                             
+                                                                                  
+                                                                                  </pre>
+          <div class="scanline" aria-hidden="true"></div>
+        </div>
+
+        <audio id="audio" preload="metadata"></audio>
+        <div class="timeline-row">
+          <span id="currentTime">0:00</span>
+          <input id="seek" type="range" min="0" max="1000" value="0" aria-label="Seek through track">
+          <span id="duration">0:00</span>
+        </div>
+
+        <div class="player-controls">
+          <label class="file-button">
+            <input id="fileInput" type="file" accept="audio/*">
+            <span>Choose audio</span>
+          </label>
+          <button id="playButton" type="button" disabled>Play</button>
+          <button id="demoButton" type="button">Signal demo</button>
+          <label class="volume-control">
+            <span>VOL</span>
+            <input id="volume" type="range" min="0" max="1" step="0.01" value="0.75" aria-label="Volume">
+          </label>
+          <button id="fullscreenButton" type="button">Fullscreen</button>
+        </div>
+        <p class="drop-hint">Drag and drop anywhere on the player. Your audio is never uploaded.</p>
+      </div>
+    </section>
+
+    <section class="feature-grid shell" aria-label="Features">
+      <article>
+        <span class="feature-number">01</span>
+        <h3>Actual signal analysis</h3>
+        <p>The browser edition reads the live frequency spectrum through Web Audio and maps it into a responsive character field.</p>
+      </article>
+      <article>
+        <span class="feature-number">02</span>
+        <h3>Local-first by design</h3>
+        <p>No sign-in, server upload, analytics SDK, or remote media library. Select a file and play it where it already lives.</p>
+      </article>
+      <article>
+        <span class="feature-number">03</span>
+        <h3>Terminal plus PWA</h3>
+        <p>The Python build is tuned for desktop terminals. The web build installs like an app and handles Android cleanly.</p>
+      </article>
+    </section>
+
+    <section id="platforms" class="platforms shell">
+      <div class="section-heading compact">
+        <p class="eyebrow">PLATFORM MATRIX</p>
+        <h2>One project, two native surfaces</h2>
+      </div>
+      <div class="platform-table" role="table" aria-label="Platform support">
+        <div class="platform-row header" role="row">
+          <span role="columnheader">Platform</span><span role="columnheader">Terminal app</span><span role="columnheader">Web app</span><span role="columnheader">Recommended path</span>
+        </div>
+        <div class="platform-row" role="row">
+          <strong role="cell">Windows</strong><span role="cell">Supported</span><span role="cell">Supported</span><span role="cell">Terminal build</span>
+        </div>
+        <div class="platform-row" role="row">
+          <strong role="cell">Linux</strong><span role="cell">Supported</span><span role="cell">Supported</span><span role="cell">Terminal build</span>
+        </div>
+        <div class="platform-row" role="row">
+          <strong role="cell">Android</strong><span role="cell">Not targeted</span><span role="cell">Installable PWA</span><span role="cell">Browser edition</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="install" class="install shell">
+      <div class="section-heading compact">
+        <p class="eyebrow">INSTALLATION</p>
+        <h2>Start without a build system</h2>
+      </div>
+      <div class="install-grid">
+        <article class="command-card">
+          <div class="command-title"><span>WINDOWS / LINUX</span><button data-copy="desktopCommand">Copy</button></div>
+          <pre id="desktopCommand"><code>git clone https://github.com/5ivesaw/Ascii-Media-Player.git
+cd Ascii-Media-Player
+python -m pip install -r requirements.txt
+python app.py /path/to/music</code></pre>
+        </article>
+        <article class="command-card">
+          <div class="command-title"><span>ANDROID</span></div>
+          <div class="android-steps">
+            <p>Open this page in Chrome or another PWA-capable browser.</p>
+            <p>Use the browser menu and choose <strong>Install app</strong> or <strong>Add to Home screen</strong>.</p>
+            <p>Launch it later as a standalone local player.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="shell">
+    <img src="assets/logo.svg" alt="" width="28" height="28">
+    <p>ASCII Media Player. Built by 5ivesaw.</p>
+    <a href="https://github.com/5ivesaw/Ascii-Media-Player">GitHub repository</a>
+  </footer>
+
+  <script src="player.js" defer></script>
+</body>
+</html>

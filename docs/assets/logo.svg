@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">ASCII Media Player logo</title>
+  <desc id="desc">A terminal prompt combined with an audio waveform</desc>
+  <rect x="2" y="2" width="60" height="60" rx="12" fill="#0d121a" stroke="#57e6ff" stroke-width="2"/>
+  <path d="M13 19l9 8-9 8" fill="none" stroke="#b8ff5a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M26 43h6V31h5v8h5V23h5v14h5" fill="none" stroke="#57e6ff" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"/>
+</svg>

@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 570" role="img" aria-labelledby="title desc">
+  <title id="title">ASCII Media Player terminal preview</title>
+  <desc id="desc">A dark terminal window containing an animated-looking audio spectrum made from text characters</desc>
+  <defs>
+    <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#18232e"/>
+      <stop offset="1" stop-color="#0a0f15"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="18" y="24" width="724" height="520" rx="18" fill="#05080c" stroke="url(#frame)" stroke-width="8"/>
+  <rect x="28" y="34" width="704" height="54" rx="10" fill="#101720"/>
+  <circle cx="56" cy="61" r="6" fill="none" stroke="#556372"/>
+  <circle cx="78" cy="61" r="6" fill="none" stroke="#556372"/>
+  <circle cx="100" cy="61" r="6" fill="none" stroke="#556372"/>
+  <text x="380" y="66" text-anchor="middle" fill="#8d9aaa" font-family="monospace" font-size="14" letter-spacing="2">ASCII MEDIA PLAYER</text>
+  <text x="68" y="130" fill="#57e6ff" font-family="monospace" font-size="17">NOW PLAYING  signal_memory.flac</text>
+  <text x="68" y="159" fill="#8d9aaa" font-family="monospace" font-size="14">01:27 / 03:54      VOL [##############----] 78%</text>
+  <g fill="#57e6ff" font-family="monospace" font-size="16" filter="url(#glow)">
+    <text x="74" y="220">                    .       .                       </text>
+    <text x="74" y="244">      .       .   : : .   . :       .       .       </text>
+    <text x="74" y="268">  .  : :  .  :;::;:;::...:;:  .  : :  .  : : .   </text>
+    <text x="74" y="292"> .:.:ir:.:;:irXXAAXXi;;irA2;:.:;:ir:.:;:ir:;:.   </text>
+    <text x="74" y="316">:iXA253irXA25hMHGS#9B&amp;@B9#SGMh52AXri352AXriXA253:</text>
+    <text x="74" y="340">XA25hMHGS#9B&amp;@@@@@@@@@@@&amp;B9#SGMh52AXriXA25hMHGS#</text>
+    <text x="74" y="364">hMHGS#9B&amp;@@@@@@@@@@@@@@@@@@@@@&amp;B9#SGMhMHGS#9B&amp;@@</text>
+    <text x="74" y="388">GS#9B&amp;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&amp;B9#GS#9B&amp;@@@</text>
+  </g>
+  <rect x="68" y="432" width="620" height="9" rx="4.5" fill="#1b2632"/>
+  <rect x="68" y="432" width="343" height="9" rx="4.5" fill="#b8ff5a"/>
+  <text x="68" y="486" fill="#8d9aaa" font-family="monospace" font-size="13">SPACE PAUSE  N/P TRACK  ARROWS SEEK/VOLUME  M MUTE  Q QUIT</text>
+  <path d="M612 112h75" stroke="#b8ff5a" stroke-width="2"/>
+  <text x="650" y="104" text-anchor="middle" fill="#b8ff5a" font-family="monospace" font-size="11">LIVE</text>
+</svg>

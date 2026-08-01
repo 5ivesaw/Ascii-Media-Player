@@ -1,7 +1,5 @@
-numpy
-Pillow
-pygame
-mutagen
-colorama
-yt-dlp
-pyfiglet
+colorama>=0.4.6
+mutagen>=1.47.0
+pygame>=2.5.2
+pyfiglet>=1.0.2
+yt-dlp>=2025.1.26

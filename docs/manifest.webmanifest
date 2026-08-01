@@ -1,0 +1,19 @@
+{
+  "name": "ASCII Media Player",
+  "short_name": "ASCII Player",
+  "description": "Local-first audio playback with a live ASCII spectrum visualizer.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#070a0f",
+  "theme_color": "#070a0f",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "assets/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
