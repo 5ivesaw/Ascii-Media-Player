@@ -11,13 +11,19 @@ permissions:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Validate Python and website files
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Validate Python, website, Android project, and workflows
         run: |
           python3 scripts/validate-project.py
           node --check docs/player.js
           node --check docs/sw.js
+          python3 scripts/set-version.py --print

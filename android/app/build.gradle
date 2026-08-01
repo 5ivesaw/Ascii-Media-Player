@@ -1,0 +1,56 @@
+plugins {
+    id 'com.android.application'
+}
+
+def releaseKeystorePath = System.getenv('ANDROID_KEYSTORE_PATH')
+def releaseStorePassword = System.getenv('ANDROID_STORE_PASSWORD')
+def releaseKeyAlias = System.getenv('ANDROID_KEY_ALIAS')
+def releaseKeyPassword = System.getenv('ANDROID_KEY_PASSWORD')
+def hasReleaseSigning = releaseKeystorePath && releaseStorePassword && releaseKeyAlias && releaseKeyPassword
+
+android {
+    namespace 'lol.goat.asciimediaplayer'
+    compileSdk 36
+
+    defaultConfig {
+        applicationId 'lol.goat.asciimediaplayer'
+        minSdk 23
+        targetSdk 36
+        versionCode 2002000
+        versionName '2.2.0'
+    }
+
+    sourceSets {
+        main {
+            assets.srcDirs = ['../../docs']
+        }
+    }
+
+    signingConfigs {
+        release {
+            if (hasReleaseSigning) {
+                storeFile file(releaseKeystorePath)
+                storePassword releaseStorePassword
+                keyAlias releaseKeyAlias
+                keyPassword releaseKeyPassword
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            shrinkResources false
+            signingConfig hasReleaseSigning ? signingConfigs.release : signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    buildFeatures {
+        buildConfig false
+    }
+}

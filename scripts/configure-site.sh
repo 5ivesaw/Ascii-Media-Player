@@ -51,6 +51,8 @@ def parse_repository(value: str) -> tuple[str, str]:
 
 
 owner, repository = parse_repository(remote)
+version_match = re.search(r'^APP_VERSION\s*=\s*[\"\']([^\"\']+)', (root / 'app.py').read_text(encoding='utf-8'), flags=re.MULTILINE)
+version = version_match.group(1) if version_match else '2.2.0'
 repo_url = f'https://github.com/{owner}/{repository}'
 if requested_site:
     site_url = requested_site.rstrip('/') + '/'
@@ -73,7 +75,7 @@ if config_path.exists():
 
 config_path.write_text(
     "window.ASCII_MEDIA_PLAYER_CONFIG = Object.freeze({\n"
-    "  version: '2.1.0',\n"
+    f"  version: {version!r},\n"
     f"  repositoryUrl: {repo_url!r},\n"
     f"  siteUrl: {site_url!r}\n"
     "});\n",
@@ -86,6 +88,9 @@ text_files = [
     root / 'docs' / '404.html',
     root / 'docs' / 'robots.txt',
     root / 'docs' / 'sitemap.xml',
+    root / 'scripts' / 'install-linux.sh',
+    root / 'scripts' / 'install-macos.sh',
+    root / 'scripts' / 'install-windows.ps1',
 ]
 
 for path in text_files:

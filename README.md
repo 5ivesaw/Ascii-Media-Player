@@ -1,21 +1,21 @@
 <p align="center">
   <a href="https://5ivesaw.github.io/Ascii-Media-Player/">
-    <img src="docs/assets/logo.svg" width="92" alt="ASCII Media Player logo">
+    <img src="docs/assets/logo.svg" width="96" alt="ASCII Media Player logo">
   </a>
 </p>
 
 <h1 align="center">ASCII Media Player</h1>
 
 <p align="center">
-  Local audio playback with a real-time ASCII spectrum, available as a terminal application and an installable browser player.
+  Local audio playback with a real-time ASCII spectrum, packaged for Windows, Linux, Android, macOS, and the web.
 </p>
 
 <p align="center">
-  <a href="https://5ivesaw.github.io/Ascii-Media-Player/">Launch the web player</a>
+  <a href="https://5ivesaw.github.io/Ascii-Media-Player/">Launch web player</a>
   ·
-  <a href="#desktop-installation">Desktop installation</a>
+  <a href="https://github.com/5ivesaw/Ascii-Media-Player/releases/latest">Download latest release</a>
   ·
-  <a href="#platform-support">Platform support</a>
+  <a href="#release-system">Release system</a>
   ·
   <a href="#publishing-from-termux">Publish from Termux</a>
 </p>
@@ -26,59 +26,115 @@
 
 ## Overview
 
-ASCII Media Player is a local-first audio player built around two interfaces:
+ASCII Media Player is a local-first music player with two engines:
 
-- A Python terminal application for Windows and Linux.
-- An offline-capable browser application for Windows, Linux, and Android.
+- A Python terminal application for recursive folder playback, keyboard controls, cached FFmpeg conversion, and optional `yt-dlp` downloads.
+- A browser player that analyzes local files through the Web Audio API and renders a spectrum or waveform as text.
 
-The terminal build scans music folders recursively, handles playback and seeking, converts unsupported formats through FFmpeg, caches converted audio, and optionally downloads audio with `yt-dlp`. The web build analyzes local audio with the Web Audio API and never uploads the selected files.
+The browser edition never uploads selected audio. The Android APK bundles that browser player inside a native WebView shell, including Android file selection and fullscreen handling.
 
-## Version 2.1
+## Version 2.2
 
-The 2.1 website upgrade adds:
+Version 2.2 turns the project into a complete release product rather than a source-only repository.
 
-- A redesigned responsive product site and app shell.
-- A multi-track local queue with previous, next, repeat, shuffle, and remove controls.
-- Spectrum and waveform ASCII rendering modes.
-- Four visual themes and adjustable visualizer density.
-- Keyboard shortcuts, improved focus states, and reduced-motion support.
-- A generated signal demo with no bundled copyrighted media.
-- An install prompt for compatible PWA browsers.
-- Better offline caching and update handling.
-- PNG and SVG application artwork for Android and desktop installation.
-- Search metadata, a social preview card, `robots.txt`, `sitemap.xml`, and a Pages fallback page.
-- Automatic GitHub Pages deployment on every relevant push to `main`.
-- A Termux publisher that detects the repository, calculates the Pages URL, enables Pages, updates the repository website field, validates the project, commits, pushes, and waits for deployment.
+- Windows x64 standalone EXE and ZIP package.
+- Linux x64 portable binary and tar package.
+- Linux ARM64 portable binary and tar package.
+- Android APK containing the offline web player.
+- macOS Intel native package.
+- macOS Apple Silicon native package.
+- Source archive and SHA-256 checksum file.
+- One GitHub Release generated automatically for every version tag.
+- Website buttons that resolve the newest release and recommend the correct platform.
+- Stable Android release signing configured from Termux through GitHub repository secrets.
+- Direct Linux, macOS, and Windows installer scripts.
 
-## Platform support
+## Download matrix
 
-| Platform | Terminal application | Web application | Recommended route |
-|---|---:|---:|---|
-| Windows 10/11 | Supported | Supported | Terminal application or installed PWA |
-| Linux | Supported | Supported | Terminal application or installed PWA |
-| Android | Not targeted | Supported | Installed PWA or browser |
+| Platform | Release asset | Architecture | Notes |
+|---|---|---|---|
+| Windows | `.exe` and `.zip` | x64 | Python is bundled |
+| Linux | binary and `.tar.gz` | x64 | Includes local installer |
+| Linux | binary and `.tar.gz` | ARM64 | Includes local installer |
+| Android | `.apk` | Universal | Bundled offline web player |
+| macOS | `.zip` | Apple Silicon | Native ARM64 build |
+| macOS | `.zip` | Intel | Native x64 build |
+| Web | GitHub Pages / PWA | Browser | Installable where supported |
 
-Android support is delivered through the browser edition. This avoids presenting Pygame audio and raw terminal input in Termux as a fully supported Android desktop experience.
+Latest release: https://github.com/5ivesaw/Ascii-Media-Player/releases/latest
 
-## Desktop installation
+## Quick installation
 
-### Requirements
+### Windows
+
+Download the latest `Windows-x64.exe` asset and run it from Windows Terminal:
+
+```powershell
+.\ASCII-Media-Player-v2.2.0-Windows-x64.exe "C:\Music"
+```
+
+PowerShell installer:
+
+```powershell
+irm https://raw.githubusercontent.com/5ivesaw/Ascii-Media-Player/main/scripts/install-windows.ps1 | iex
+```
+
+### Linux
+
+Online user-level installer:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/5ivesaw/Ascii-Media-Player/main/scripts/install-linux.sh | sh
+```
+
+Then run:
+
+```bash
+ascii-media-player ~/Music
+```
+
+The release also contains direct x64 and ARM64 binaries and tar archives.
+
+### Android
+
+Download the latest `Android.apk` release asset, allow installation from the browser or file manager when Android asks, and install it. The app works offline after installation because its web interface is packaged inside the APK.
+
+### macOS
+
+Installer for the matching Mac architecture:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/5ivesaw/Ascii-Media-Player/main/scripts/install-macos.sh | sh
+```
+
+Then run:
+
+```bash
+ascii-media-player ~/Music
+```
+
+The macOS build is not Apple-notarized. The ZIP contains instructions for removing the download quarantine attribute if Gatekeeper blocks it.
+
+### Web
+
+Open the hosted player:
+
+https://5ivesaw.github.io/Ascii-Media-Player/
+
+The site supports multiple local files, drag-and-drop, queue controls, spectrum and waveform modes, repeat, shuffle, seeking, volume, fullscreen, four themes, and an offline application shell.
+
+## Run from source
+
+Requirements:
 
 - Python 3.10 or newer
-- FFmpeg for FLAC, AAC, M4A, WebM, Opus, and WMA conversion
+- FFmpeg only for FLAC, AAC, M4A, WebM, Opus, and WMA conversion
 - An ANSI-capable terminal
-
-### Install
 
 ```bash
 git clone https://github.com/5ivesaw/Ascii-Media-Player.git
 cd Ascii-Media-Player
 python -m pip install -r requirements.txt
-```
-
-### Run
-
-```bash
 python app.py "/path/to/music"
 ```
 
@@ -88,13 +144,7 @@ Interactive folder selection:
 python app.py
 ```
 
-Skip the startup animation:
-
-```bash
-python app.py "/path/to/music" --no-banner
-```
-
-Pre-convert compatible files into reusable cached WAV files:
+Pre-convert supported compressed files into the reusable cache:
 
 ```bash
 python app.py --convert-only "/path/to/music"
@@ -114,64 +164,83 @@ python app.py --convert-only "/path/to/music"
 | `Y` | Download through `yt-dlp` |
 | `Q` | Quit |
 
-## Web player
+## Release system
 
-The production website lives in `docs/` and deploys through GitHub Pages.
+`.github/workflows/release.yml` runs when a tag such as `v2.2.0` is pushed. Each desktop build runs on its actual target operating system because PyInstaller is not a cross-compiler.
 
-Live site: https://5ivesaw.github.io/Ascii-Media-Player/
+The workflow performs these jobs:
 
-The browser player supports:
+1. Validate the tag against `APP_VERSION` and validate the full project.
+2. Build Windows x64 with PyInstaller on a Windows runner.
+3. Build Linux x64 and ARM64 on separate Linux runners.
+4. Build macOS Intel and Apple Silicon on separate Mac runners.
+5. Build the Android APK with Android Gradle Plugin 9.3, Gradle 9.5, JDK 17, and Android API 36.
+6. Download all workflow artifacts into one release job.
+7. Add installer scripts and a source ZIP.
+8. Generate `SHA256SUMS.txt`.
+9. Create or update the matching GitHub Release.
 
-- Multi-file selection and drag-and-drop.
-- A local queue with current-track highlighting.
-- MP3, WAV, OGG, FLAC, M4A, and any other format decoded by the browser.
-- Real-time spectrum and waveform ASCII modes.
-- Play, pause, previous, next, seek, volume, repeat, shuffle, and fullscreen.
-- Theme and density controls.
-- A generated signal demo.
-- Offline shell caching.
-- PWA installation on supported Android and desktop browsers.
+The release can also be rebuilt manually from Actions by selecting the existing tag in the workflow input.
 
-To preview locally:
+## Android signing
 
-```bash
-python -m http.server 8000 --directory docs
+`scripts/publish-termux.sh` creates a long-lived Android release key on the phone the first time it runs. It stores the key and passwords as encrypted GitHub repository secrets:
+
+- `ANDROID_KEYSTORE_BASE64`
+- `ANDROID_STORE_PASSWORD`
+- `ANDROID_KEY_PASSWORD`
+- `ANDROID_KEY_ALIAS`
+
+The local backup is stored under:
+
+```text
+~/.config/ascii-media-player/signing
 ```
 
-Then open `http://localhost:8000`.
+The GitHub secrets allow future versions to keep the same Android application signature. If the secrets are absent, the workflow falls back to a debug signing key; that APK remains installable but is not suitable as a stable update channel.
 
 ## Publishing from Termux
 
-The included `scripts/publish-termux.sh` performs the complete publish flow. It:
+The upgrade publisher performs the full operation from Android:
 
-1. Clones the latest `main` branch.
-2. Replaces project files with this upgrade.
-3. Detects `OWNER/REPOSITORY` from the Git remote.
-4. Calculates the GitHub Pages URL.
-5. Rewrites managed repository and site links.
-6. Validates Python, JavaScript, JSON, XML, and required website files.
-7. Commits and pushes to `main`.
-8. Enables Pages with the workflow publishing source when GitHub CLI authentication is available.
-9. Updates the repository website field to the deployed Pages URL.
-10. Waits for the Pages workflow and prints the final address.
+1. Clones the current `main` branch.
+2. Replaces it with the packaged upgrade.
+3. Detects the repository and calculates its GitHub Pages URL.
+4. Rewrites website and repository links.
+5. Validates Python, JavaScript, JSON, XML, SVG, PNG, Android, packaging, and workflow files.
+6. Creates and uploads stable Android signing secrets when needed.
+7. Commits and pushes `main`.
+8. Enables GitHub Pages and updates the repository Website field.
+9. Pushes the version tag.
+10. Waits for the cross-platform release workflow.
 
-Run it from the extracted package:
+From the extracted upgrade package:
 
 ```bash
 bash scripts/publish-termux.sh
 ```
 
-The script supports another repository URL as its first argument:
+To publish the current source as another semantic version:
 
 ```bash
-bash scripts/publish-termux.sh https://github.com/OWNER/REPOSITORY.git
+bash scripts/release-termux.sh 2.2.1
 ```
 
-## GitHub Pages deployment
+## Version management
 
-The workflow in `.github/workflows/pages.yml` runs whenever `docs/` or the workflow changes on `main`. It validates the static site, uploads `docs/` as the Pages artifact, and deploys it to the `github-pages` environment.
+Read the current version:
 
-The publisher uses the authenticated GitHub CLI to set the repository homepage to the calculated site URL. This API step requires repository administration access. The website deployment still works if that metadata update is skipped.
+```bash
+python scripts/set-version.py --print
+```
+
+Update every managed version field:
+
+```bash
+python scripts/set-version.py 2.2.1
+```
+
+This updates the Python application, website metadata, Android version name, and Android version code.
 
 ## Project structure
 
@@ -179,49 +248,53 @@ The publisher uses the authenticated GitHub CLI to set the repository homepage t
 .
 ├── app.py
 ├── requirements.txt
-├── README.md
-├── LICENSE
+├── android/
+│   ├── build.gradle
+│   ├── settings.gradle
+│   └── app/
+│       ├── build.gradle
+│       └── src/main/
+├── packaging/
+│   ├── README-WINDOWS.txt
+│   ├── README-LINUX.txt
+│   ├── README-MACOS.txt
+│   └── platform launchers
 ├── scripts/
+│   ├── build-desktop.py
 │   ├── configure-site.sh
+│   ├── install-linux.sh
+│   ├── install-macos.sh
+│   ├── install-windows.ps1
 │   ├── publish-termux.sh
+│   ├── release-termux.sh
+│   ├── set-version.py
 │   └── validate-project.py
-├── .github/
-│   └── workflows/
-│       ├── pages.yml
-│       └── validate.yml
+├── .github/workflows/
+│   ├── pages.yml
+│   ├── release.yml
+│   └── validate.yml
 └── docs/
     ├── index.html
-    ├── 404.html
     ├── styles.css
     ├── player.js
     ├── site-config.js
     ├── sw.js
     ├── manifest.webmanifest
-    ├── robots.txt
-    ├── sitemap.xml
-    ├── version.json
     └── assets/
-        ├── logo.svg
-        ├── wordmark.svg
-        ├── terminal-frame.svg
-        ├── og-card.svg
-        ├── og-card.png
-        ├── icon-192.png
-        ├── icon-512.png
-        └── maskable-512.png
 ```
 
 ## Privacy
 
-Audio selected in the web player is opened through local object URLs and analyzed on-device. The project contains no upload endpoint, account system, analytics SDK, tracking pixel, or remote media database.
+Selected web and Android audio files are opened locally. The project has no upload endpoint, user account, analytics SDK, advertising code, tracking pixel, or remote media database.
 
-The optional terminal `yt-dlp` command makes network requests only when explicitly invoked. Users are responsible for following the rules and copyright requirements that apply to the selected source.
+The optional terminal `yt-dlp` command makes network requests only after the user explicitly invokes it.
 
 ## Development checks
 
 ```bash
 python -m py_compile app.py
 python scripts/validate-project.py
+python scripts/set-version.py --print
 node --check docs/player.js
 node --check docs/sw.js
 ```

@@ -1,0 +1,259 @@
+name: Build cross-platform release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing version tag to rebuild, for example v2.2.0
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+  cancel-in-progress: false
+
+env:
+  RELEASE_REF: ${{ github.event_name == 'workflow_dispatch' && inputs.tag || github.ref_name }}
+  PYTHON_VERSION: "3.13"
+  PYINSTALLER_VERSION: "6.21.0"
+
+jobs:
+  validate:
+    name: Validate release source
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout version tag
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.RELEASE_REF }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+
+      - name: Verify tag and project
+        shell: bash
+        run: |
+          VERSION="$(python scripts/set-version.py --print)"
+          test "$RELEASE_REF" = "v$VERSION"
+          python scripts/validate-project.py
+          node --check docs/player.js
+          node --check docs/sw.js
+
+  desktop:
+    name: ${{ matrix.label }}
+    needs: validate
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - label: Windows x64
+            runner: windows-2025
+            platform: windows
+            arch: x64
+            artifact: release-windows-x64
+          - label: Linux x64
+            runner: ubuntu-22.04
+            platform: linux
+            arch: x64
+            artifact: release-linux-x64
+          - label: Linux ARM64
+            runner: ubuntu-22.04-arm
+            platform: linux
+            arch: arm64
+            artifact: release-linux-arm64
+          - label: macOS Intel
+            runner: macos-15-intel
+            platform: macos
+            arch: x64
+            artifact: release-macos-intel
+          - label: macOS Apple Silicon
+            runner: macos-15
+            platform: macos
+            arch: arm64
+            artifact: release-macos-arm64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - name: Checkout version tag
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.RELEASE_REF }}
+
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Install Linux runtime libraries
+        if: matrix.platform == 'linux'
+        shell: bash
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libasound2 libpulse0 libglib2.0-0
+
+      - name: Install build dependencies
+        shell: bash
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt "pyinstaller==$PYINSTALLER_VERSION"
+
+      - name: Build and package
+        shell: bash
+        env:
+          SDL_AUDIODRIVER: dummy
+          PYGAME_HIDE_SUPPORT_PROMPT: "1"
+        run: python scripts/build-desktop.py --platform "${{ matrix.platform }}" --arch "${{ matrix.arch }}"
+
+      - name: Upload release files
+        uses: actions/upload-artifact@v7
+        with:
+          name: ${{ matrix.artifact }}
+          path: release-assets/*
+          if-no-files-found: error
+          compression-level: 0
+
+  android:
+    name: Android APK
+    needs: validate
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout version tag
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.RELEASE_REF }}
+
+      - name: Setup Java
+        uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: "17"
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v6
+        with:
+          gradle-version: "9.5.0"
+          cache-provider: basic
+
+      - name: Install Android SDK packages
+        shell: bash
+        run: |
+          yes | sdkmanager --licenses >/dev/null || true
+          sdkmanager "platform-tools" "platforms;android-36" "build-tools;36.0.0"
+
+      - name: Restore release signing key
+        shell: bash
+        env:
+          KEYSTORE_BASE64: ${{ secrets.ANDROID_KEYSTORE_BASE64 }}
+          STORE_PASSWORD: ${{ secrets.ANDROID_STORE_PASSWORD }}
+          KEY_PASSWORD: ${{ secrets.ANDROID_KEY_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.ANDROID_KEY_ALIAS }}
+        run: |
+          if [ -n "$KEYSTORE_BASE64" ] && [ -n "$STORE_PASSWORD" ] && [ -n "$KEY_PASSWORD" ] && [ -n "$KEY_ALIAS" ]; then
+            printf '%s' "$KEYSTORE_BASE64" | base64 --decode > "$RUNNER_TEMP/ascii-media-player-release.jks"
+            echo "ANDROID_KEYSTORE_PATH=$RUNNER_TEMP/ascii-media-player-release.jks" >> "$GITHUB_ENV"
+            echo "ANDROID_STORE_PASSWORD=$STORE_PASSWORD" >> "$GITHUB_ENV"
+            echo "ANDROID_KEY_PASSWORD=$KEY_PASSWORD" >> "$GITHUB_ENV"
+            echo "ANDROID_KEY_ALIAS=$KEY_ALIAS" >> "$GITHUB_ENV"
+          else
+            echo "Android signing secrets are missing. This run will use Gradle's debug signing key."
+          fi
+
+      - name: Build release APK
+        shell: bash
+        run: gradle -p android --no-daemon :app:assembleRelease
+
+      - name: Name APK
+        shell: bash
+        run: |
+          VERSION="$(python3 scripts/set-version.py --print)"
+          mkdir -p release-assets
+          cp android/app/build/outputs/apk/release/app-release.apk "release-assets/ASCII-Media-Player-v$VERSION-Android.apk"
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v7
+        with:
+          name: release-android
+          path: release-assets/*
+          if-no-files-found: error
+          compression-level: 0
+
+  publish:
+    name: Publish GitHub Release
+    needs:
+      - desktop
+      - android
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout version tag
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ env.RELEASE_REF }}
+
+      - name: Download every build
+        uses: actions/download-artifact@v5
+        with:
+          pattern: release-*
+          path: release-assets
+          merge-multiple: true
+
+      - name: Add installers and source package
+        shell: bash
+        run: |
+          VERSION="$(python3 scripts/set-version.py --print)"
+          cp scripts/install-linux.sh "release-assets/install-linux.sh"
+          cp scripts/install-macos.sh "release-assets/install-macos.sh"
+          cp scripts/install-windows.ps1 "release-assets/install-windows.ps1"
+          chmod +x release-assets/install-linux.sh release-assets/install-macos.sh
+          git archive --format=zip --prefix="ASCII-Media-Player-v$VERSION/" -o "release-assets/ASCII-Media-Player-v$VERSION-Source.zip" HEAD
+          (
+            cd release-assets
+            sha256sum * | sort -k2 > SHA256SUMS.txt
+          )
+          find release-assets -maxdepth 1 -type f -printf '%f\n' | sort
+
+      - name: Write release notes
+        shell: bash
+        run: |
+          VERSION="$(python3 scripts/set-version.py --print)"
+          cat > release-notes.md <<EOF
+          # ASCII Media Player v$VERSION
+
+          Cross-platform release generated from one version tag.
+
+          ## Downloads
+
+          - Windows x64: standalone EXE and ZIP package
+          - Linux x64: portable binary and tar archive
+          - Linux ARM64: portable binary and tar archive
+          - Android: installable APK containing the offline web player
+          - macOS Apple Silicon: native ARM64 package
+          - macOS Intel: native x64 package
+          - Source ZIP and SHA-256 checksums
+
+          The Android APK is signed with the repository signing secrets when configured by scripts/release-termux.sh. macOS binaries are not Apple-notarized, so Gatekeeper may require removing the quarantine attribute as described in the included README.
+          EOF
+
+      - name: Create or update release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="$RELEASE_REF"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" release-assets/* --clobber
+            gh release edit "$TAG" --title "ASCII Media Player $TAG" --notes-file release-notes.md --latest
+          else
+            gh release create "$TAG" release-assets/* \
+              --verify-tag \
+              --title "ASCII Media Player $TAG" \
+              --notes-file release-notes.md \
+              --latest
+          fi

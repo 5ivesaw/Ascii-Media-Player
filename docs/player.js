@@ -1,7 +1,7 @@
 'use strict';
 
 const config = window.ASCII_MEDIA_PLAYER_CONFIG || {
-  version: '2.1.0',
+  version: '2.2.0',
   repositoryUrl: 'https://github.com/5ivesaw/Ascii-Media-Player',
   siteUrl: 'https://5ivesaw.github.io/Ascii-Media-Player/'
 };
@@ -467,6 +467,7 @@ function applyConfig() {
   $$('[data-repo-link]').forEach((link) => { link.href = repositoryUrl; });
   $$('[data-issues-link]').forEach((link) => { link.href = `${repositoryUrl}/issues`; });
   $$('[data-repo-install-link]').forEach((link) => { link.href = `${repositoryUrl}#desktop-installation`; });
+  $$('[data-release-link]').forEach((link) => { link.href = `${repositoryUrl}/releases/latest`; });
 
   const installCode = $('#installCode code');
   if (installCode) {
@@ -476,10 +477,125 @@ function applyConfig() {
   }
 
   const appVersion = $('#appVersion');
-  if (appVersion) appVersion.textContent = `VERSION ${config.version || '2.1.0'}`;
+  if (appVersion) appVersion.textContent = `VERSION ${config.version || '2.2.0'}`;
 
   document.title = 'ASCII Media Player — Local Audio Visualizer';
   window.__ASCII_SITE_URL__ = siteUrl;
+  window.__ASCII_REPOSITORY_URL__ = repositoryUrl;
+}
+
+
+function releaseAsset(release, pattern) {
+  return release?.assets?.find((asset) => pattern.test(asset.name));
+}
+
+function setReleaseButton(id, asset, label) {
+  const button = document.getElementById(id);
+  if (!button || !asset) return;
+  button.href = asset.browser_download_url;
+  button.textContent = label;
+  button.dataset.assetName = asset.name;
+}
+
+async function deviceArchitecture() {
+  try {
+    if (navigator.userAgentData?.getHighEntropyValues) {
+      const values = await navigator.userAgentData.getHighEntropyValues(['architecture', 'bitness']);
+      const architecture = `${values.architecture || ''}${values.bitness || ''}`.toLowerCase();
+      if (architecture.includes('arm')) return 'arm64';
+      if (architecture.includes('x86') || architecture.includes('64')) return 'x64';
+    }
+  } catch (_) {
+    // Browser privacy settings may hide architecture details.
+  }
+  const userAgent = navigator.userAgent.toLowerCase();
+  if (/aarch64|arm64/.test(userAgent)) return 'arm64';
+  return 'x64';
+}
+
+function devicePlatform() {
+  const userAgent = navigator.userAgent.toLowerCase();
+  const platform = String(navigator.userAgentData?.platform || navigator.platform || '').toLowerCase();
+  if (userAgent.includes('android')) return 'android';
+  if (platform.includes('win') || userAgent.includes('windows')) return 'windows';
+  if (platform.includes('mac') || userAgent.includes('mac os')) return 'macos';
+  if (platform.includes('linux') || userAgent.includes('linux')) return 'linux';
+  return 'unknown';
+}
+
+async function loadLatestRelease() {
+  const repositoryUrl = (window.__ASCII_REPOSITORY_URL__ || config.repositoryUrl).replace(/\/$/, '');
+  const parts = repositoryUrl.split('/').filter(Boolean);
+  const slug = `${parts.at(-2)}/${parts.at(-1)}`;
+  const fallback = `${repositoryUrl}/releases/latest`;
+  const platform = devicePlatform();
+  const architecture = await deviceArchitecture();
+
+  const recommendedCard = document.querySelector(`[data-platform-card="${platform}"]`);
+  recommendedCard?.classList.add('recommended');
+
+  try {
+    const response = await fetch(`https://api.github.com/repos/${slug}/releases/latest`, {
+      headers: { Accept: 'application/vnd.github+json' }
+    });
+    if (!response.ok) throw new Error(`GitHub release API returned ${response.status}`);
+    const release = await response.json();
+
+    const assets = {
+      windows: releaseAsset(release, /Windows-x64\.exe$/i),
+      android: releaseAsset(release, /Android\.apk$/i),
+      linuxX64: releaseAsset(release, /Linux-x64\.tar\.gz$/i),
+      linuxArm: releaseAsset(release, /Linux-arm64\.tar\.gz$/i),
+      macArm: releaseAsset(release, /macOS-Apple-Silicon\.zip$/i),
+      macIntel: releaseAsset(release, /macOS-Intel\.zip$/i)
+    };
+
+    setReleaseButton('downloadWindows', assets.windows, 'Download EXE');
+    setReleaseButton('downloadAndroid', assets.android, 'Download APK');
+    setReleaseButton('downloadLinux', architecture === 'arm64' ? assets.linuxArm : assets.linuxX64, `Download Linux ${architecture === 'arm64' ? 'ARM64' : 'x64'}`);
+    setReleaseButton('downloadMacArm', assets.macArm, 'Apple Silicon');
+    setReleaseButton('downloadMacIntel', assets.macIntel, 'Intel');
+
+    const version = release.tag_name || release.name || config.version;
+    const published = release.published_at
+      ? new Intl.DateTimeFormat(undefined, { year: 'numeric', month: 'short', day: 'numeric' }).format(new Date(release.published_at))
+      : 'Published on GitHub';
+    const releaseVersion = document.getElementById('releaseVersion');
+    const releasePublished = document.getElementById('releasePublished');
+    const latestReleaseLabel = document.getElementById('latestReleaseLabel');
+    if (releaseVersion) releaseVersion.textContent = version.toUpperCase();
+    if (releasePublished) releasePublished.textContent = `${published} · ${release.assets?.length || 0} downloadable files`;
+    if (latestReleaseLabel) latestReleaseLabel.textContent = `${version} is the latest stable release. Downloads below come directly from GitHub.`;
+
+    let recommendedAsset = null;
+    let recommendedLabel = 'View latest release';
+    if (platform === 'windows') {
+      recommendedAsset = assets.windows;
+      recommendedLabel = 'Download for Windows';
+    } else if (platform === 'android') {
+      recommendedAsset = assets.android;
+      recommendedLabel = 'Download Android APK';
+    } else if (platform === 'linux') {
+      recommendedAsset = architecture === 'arm64' ? assets.linuxArm : assets.linuxX64;
+      recommendedLabel = `Download Linux ${architecture === 'arm64' ? 'ARM64' : 'x64'}`;
+    } else if (platform === 'macos') {
+      recommendedAsset = architecture === 'arm64' ? assets.macArm : assets.macIntel;
+      recommendedLabel = architecture === 'arm64' ? 'Download for Apple Silicon' : 'Download for Intel Mac';
+    }
+
+    ['recommendedDownload', 'heroDownload'].forEach((id) => {
+      const button = document.getElementById(id);
+      if (!button) return;
+      button.href = recommendedAsset?.browser_download_url || release.html_url || fallback;
+      button.textContent = recommendedAsset ? recommendedLabel : 'View latest release';
+    });
+  } catch (_) {
+    const latestReleaseLabel = document.getElementById('latestReleaseLabel');
+    const releasePublished = document.getElementById('releasePublished');
+    if (latestReleaseLabel) latestReleaseLabel.textContent = 'Release metadata could not be loaded. Open GitHub Releases to choose a build.';
+    if (releasePublished) releasePublished.textContent = 'GitHub API unavailable';
+    $$('[data-release-link]').forEach((link) => { link.href = fallback; });
+  }
 }
 
 function animateHeroSignal() {
@@ -723,6 +839,7 @@ const savedDensity = localStorage.getItem('amp-density');
 if (['compact', 'balanced', 'dense'].includes(savedDensity)) density.value = savedDensity;
 
 applyConfig();
+loadLatestRelease();
 renderQueue();
 $('#year').textContent = String(new Date().getFullYear());
 animateHeroSignal();
@@ -737,7 +854,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 $$('.reveal').forEach((element) => observer.observe(element));
 
-if ('serviceWorker' in navigator) {
+if ('serviceWorker' in navigator && ['http:', 'https:'].includes(window.location.protocol)) {
   window.addEventListener('load', async () => {
     try {
       const registration = await navigator.serviceWorker.register('./sw.js');

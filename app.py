@@ -23,7 +23,7 @@ import yt_dlp
 init(autoreset=True)
 
 APP_NAME = "ASCII Media Player"
-APP_VERSION = "2.1.0"
+APP_VERSION = "2.2.0"
 PLAYABLE_EXTENSIONS = {".mp3", ".wav", ".ogg"}
 CONVERTIBLE_EXTENSIONS = {".flac", ".aac", ".m4a", ".webm", ".opus", ".wma"}
 SUPPORTED_EXTENSIONS = PLAYABLE_EXTENSIONS | CONVERTIBLE_EXTENSIONS
