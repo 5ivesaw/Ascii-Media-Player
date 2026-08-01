@@ -1,63 +1,72 @@
 <p align="center">
-  <img src="docs/assets/logo.svg" width="88" alt="ASCII Media Player logo">
+  <a href="https://5ivesaw.github.io/Ascii-Media-Player/">
+    <img src="docs/assets/logo.svg" width="92" alt="ASCII Media Player logo">
+  </a>
 </p>
 
 <h1 align="center">ASCII Media Player</h1>
 
 <p align="center">
-  A local-first audio player with a terminal interface, live ASCII visualization, format conversion, and an installable browser edition.
+  Local audio playback with a real-time ASCII spectrum, available as a terminal application and an installable browser player.
 </p>
 
 <p align="center">
-  <a href="https://5ivesaw.github.io/Ascii-Media-Player/">Open the web player</a>
+  <a href="https://5ivesaw.github.io/Ascii-Media-Player/">Launch the web player</a>
   ·
   <a href="#desktop-installation">Desktop installation</a>
   ·
   <a href="#platform-support">Platform support</a>
+  ·
+  <a href="#publishing-from-termux">Publish from Termux</a>
 </p>
 
 <p align="center">
-  <img src="docs/assets/terminal-frame.svg" alt="ASCII Media Player terminal preview">
+  <img src="docs/assets/terminal-frame.svg" alt="ASCII Media Player interface preview">
 </p>
 
-## What it is
+## Overview
 
-ASCII Media Player turns local audio into a responsive text-mode experience. The project now has two surfaces:
+ASCII Media Player is a local-first audio player built around two interfaces:
 
-- A Python terminal player for Windows and Linux.
-- A browser/PWA player for Windows, Linux, and Android.
+- A Python terminal application for Windows and Linux.
+- An offline-capable browser application for Windows, Linux, and Android.
 
-The terminal build handles recursive library scanning, playback controls, cached FFmpeg conversion, local search, and optional `yt-dlp` downloads. The web build reads local files directly in the browser and generates its spectrum from the Web Audio API. Files selected in the web player are not uploaded.
+The terminal build scans music folders recursively, handles playback and seeking, converts unsupported formats through FFmpeg, caches converted audio, and optionally downloads audio with `yt-dlp`. The web build analyzes local audio with the Web Audio API and never uploads the selected files.
 
-## Highlights
+## Version 2.1
 
-- Plays MP3, WAV, and OGG directly through Pygame.
-- Converts FLAC, AAC, M4A, WebM, Opus, and WMA to cached WAV files through FFmpeg.
-- Uses non-blocking keyboard input on both Windows and POSIX terminals.
-- Scans nested folders and sorts the library consistently.
-- Supports pause, track navigation, seeking, volume, mute, and local search.
-- Includes optional URL or search-based audio downloading through `yt-dlp`.
-- Includes a responsive website with a real local-audio visualizer.
-- Installs as an offline-capable PWA on supported browsers.
-- Requires no account, cloud library, or media upload.
+The 2.1 website upgrade adds:
+
+- A redesigned responsive product site and app shell.
+- A multi-track local queue with previous, next, repeat, shuffle, and remove controls.
+- Spectrum and waveform ASCII rendering modes.
+- Four visual themes and adjustable visualizer density.
+- Keyboard shortcuts, improved focus states, and reduced-motion support.
+- A generated signal demo with no bundled copyrighted media.
+- An install prompt for compatible PWA browsers.
+- Better offline caching and update handling.
+- PNG and SVG application artwork for Android and desktop installation.
+- Search metadata, a social preview card, `robots.txt`, `sitemap.xml`, and a Pages fallback page.
+- Automatic GitHub Pages deployment on every relevant push to `main`.
+- A Termux publisher that detects the repository, calculates the Pages URL, enables Pages, updates the repository website field, validates the project, commits, pushes, and waits for deployment.
 
 ## Platform support
 
 | Platform | Terminal application | Web application | Recommended route |
 |---|---:|---:|---|
-| Windows 10/11 | Supported | Supported | Terminal application |
-| Linux | Supported | Supported | Terminal application |
-| Android | Not targeted | Supported as PWA | Web application |
+| Windows 10/11 | Supported | Supported | Terminal application or installed PWA |
+| Linux | Supported | Supported | Terminal application or installed PWA |
+| Android | Not targeted | Supported | Installed PWA or browser |
 
-Android support is provided by the browser edition because Pygame audio and raw terminal input are not reliable across Android terminal environments. This keeps Android support functional instead of marking an untested Termux path as supported.
+Android support is delivered through the browser edition. This avoids presenting Pygame audio and raw terminal input in Termux as a fully supported Android desktop experience.
 
 ## Desktop installation
 
 ### Requirements
 
 - Python 3.10 or newer
-- FFmpeg for compressed formats outside MP3, WAV, and OGG
-- A terminal with ANSI color support
+- FFmpeg for FLAC, AAC, M4A, WebM, Opus, and WMA conversion
+- An ANSI-capable terminal
 
 ### Install
 
@@ -69,58 +78,29 @@ python -m pip install -r requirements.txt
 
 ### Run
 
-Pass a music folder directly:
-
 ```bash
 python app.py "/path/to/music"
 ```
 
-Or launch without a path and select the folder interactively:
+Interactive folder selection:
 
 ```bash
 python app.py
 ```
 
-Skip the startup banner:
+Skip the startup animation:
 
 ```bash
 python app.py "/path/to/music" --no-banner
 ```
 
-Convert supported compressed files into reusable cached WAV files:
+Pre-convert compatible files into reusable cached WAV files:
 
 ```bash
 python app.py --convert-only "/path/to/music"
 ```
 
-## FFmpeg installation
-
-### Windows
-
-```powershell
-winget install Gyan.FFmpeg
-```
-
-Restart the terminal after installation.
-
-### Debian, Ubuntu, Pop!_OS
-
-```bash
-sudo apt update
-sudo apt install ffmpeg
-```
-
-### Fedora
-
-Install FFmpeg from the RPM Fusion repositories available for your Fedora release.
-
-### Arch Linux
-
-```bash
-sudo pacman -S ffmpeg
-```
-
-## Controls
+## Terminal controls
 
 | Key | Action |
 |---|---|
@@ -131,34 +111,67 @@ sudo pacman -S ffmpeg
 | `Up` / `Down` | Raise or lower volume |
 | `M` | Toggle mute |
 | `/` | Search the local library |
-| `Y` | Download from a URL or search phrase with `yt-dlp` |
+| `Y` | Download through `yt-dlp` |
 | `Q` | Quit |
 
 ## Web player
 
-The website is stored in `docs/` and is deployed with GitHub Pages.
+The production website lives in `docs/` and deploys through GitHub Pages.
 
-It supports:
+Live site: https://5ivesaw.github.io/Ascii-Media-Player/
 
-- Local file selection and drag-and-drop.
-- MP3, WAV, OGG, FLAC, M4A, and other formats supported by the browser.
-- Live frequency analysis with the Web Audio API.
-- Playback, seeking, volume, and fullscreen controls.
-- A generated signal demo that requires no sample music.
-- Offline shell caching through a service worker.
-- PWA installation on Android and desktop browsers.
+The browser player supports:
 
-Open the hosted player:
+- Multi-file selection and drag-and-drop.
+- A local queue with current-track highlighting.
+- MP3, WAV, OGG, FLAC, M4A, and any other format decoded by the browser.
+- Real-time spectrum and waveform ASCII modes.
+- Play, pause, previous, next, seek, volume, repeat, shuffle, and fullscreen.
+- Theme and density controls.
+- A generated signal demo.
+- Offline shell caching.
+- PWA installation on supported Android and desktop browsers.
 
-https://5ivesaw.github.io/Ascii-Media-Player/
-
-To preview it locally, serve the `docs` directory rather than opening the HTML file directly, because service workers require HTTP or HTTPS:
+To preview locally:
 
 ```bash
 python -m http.server 8000 --directory docs
 ```
 
 Then open `http://localhost:8000`.
+
+## Publishing from Termux
+
+The included `scripts/publish-termux.sh` performs the complete publish flow. It:
+
+1. Clones the latest `main` branch.
+2. Replaces project files with this upgrade.
+3. Detects `OWNER/REPOSITORY` from the Git remote.
+4. Calculates the GitHub Pages URL.
+5. Rewrites managed repository and site links.
+6. Validates Python, JavaScript, JSON, XML, and required website files.
+7. Commits and pushes to `main`.
+8. Enables Pages with the workflow publishing source when GitHub CLI authentication is available.
+9. Updates the repository website field to the deployed Pages URL.
+10. Waits for the Pages workflow and prints the final address.
+
+Run it from the extracted package:
+
+```bash
+bash scripts/publish-termux.sh
+```
+
+The script supports another repository URL as its first argument:
+
+```bash
+bash scripts/publish-termux.sh https://github.com/OWNER/REPOSITORY.git
+```
+
+## GitHub Pages deployment
+
+The workflow in `.github/workflows/pages.yml` runs whenever `docs/` or the workflow changes on `main`. It validates the static site, uploads `docs/` as the Pages artifact, and deploys it to the `github-pages` environment.
+
+The publisher uses the authenticated GitHub CLI to set the repository homepage to the calculated site URL. This API step requires repository administration access. The website deployment still works if that metadata update is skipped.
 
 ## Project structure
 
@@ -168,35 +181,54 @@ Then open `http://localhost:8000`.
 ├── requirements.txt
 ├── README.md
 ├── LICENSE
+├── scripts/
+│   ├── configure-site.sh
+│   ├── publish-termux.sh
+│   └── validate-project.py
 ├── .github/
 │   └── workflows/
-│       └── pages.yml
+│       ├── pages.yml
+│       └── validate.yml
 └── docs/
     ├── index.html
+    ├── 404.html
     ├── styles.css
     ├── player.js
-    ├── manifest.webmanifest
+    ├── site-config.js
     ├── sw.js
+    ├── manifest.webmanifest
+    ├── robots.txt
+    ├── sitemap.xml
+    ├── version.json
     └── assets/
         ├── logo.svg
-        └── terminal-frame.svg
+        ├── wordmark.svg
+        ├── terminal-frame.svg
+        ├── og-card.svg
+        ├── og-card.png
+        ├── icon-192.png
+        ├── icon-512.png
+        └── maskable-512.png
 ```
 
 ## Privacy
 
-The terminal application reads files from the folder you choose. The browser application creates local object URLs and analyzes audio on-device. The project does not include an upload endpoint, user account system, analytics SDK, or remote media database.
+Audio selected in the web player is opened through local object URLs and analyzed on-device. The project contains no upload endpoint, account system, analytics SDK, tracking pixel, or remote media database.
 
-The optional `yt-dlp` function makes external network requests only when you explicitly use the `Y` command. Follow the terms and copyright rules that apply to the source you access.
+The optional terminal `yt-dlp` command makes network requests only when explicitly invoked. Users are responsible for following the rules and copyright requirements that apply to the selected source.
 
 ## Development checks
 
 ```bash
 python -m py_compile app.py
+python scripts/validate-project.py
 node --check docs/player.js
+node --check docs/sw.js
 ```
-
-For the website, also test file loading, seeking, the generated signal demo, responsive layout, and PWA installation from a local HTTP server.
 
 ## License
 
 Released under the MIT License. See [LICENSE](LICENSE).
+
+[repository]: https://github.com/5ivesaw/Ascii-Media-Player
+[site]: https://5ivesaw.github.io/Ascii-Media-Player/

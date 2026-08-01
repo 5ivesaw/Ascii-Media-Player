@@ -1,7 +1,21 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
-  <title id="title">ASCII Media Player logo</title>
-  <desc id="desc">A terminal prompt combined with an audio waveform</desc>
-  <rect x="2" y="2" width="60" height="60" rx="12" fill="#0d121a" stroke="#57e6ff" stroke-width="2"/>
-  <path d="M13 19l9 8-9 8" fill="none" stroke="#b8ff5a" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M26 43h6V31h5v8h5V23h5v14h5" fill="none" stroke="#57e6ff" stroke-width="3" stroke-linecap="square" stroke-linejoin="miter"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" role="img" aria-labelledby="title desc">
+  <title id="title">ASCII Media Player</title>
+  <desc id="desc">A geometric A formed around an audio waveform.</desc>
+  <defs>
+    <linearGradient id="g" x1="18" y1="14" x2="110" y2="114" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c9f4ff"/>
+      <stop offset=".46" stop-color="#70d8ff"/>
+      <stop offset="1" stop-color="#718dff"/>
+    </linearGradient>
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect x="5" y="5" width="118" height="118" rx="28" fill="#071018" stroke="#203648" stroke-width="2"/>
+  <path d="M31 96 56 31h16l25 65H82l-5.8-16H51.6L46 96H31Zm25.6-29h14.8L64 45.8 56.6 67Z" fill="url(#g)"/>
+  <g fill="none" stroke="#70d8ff" stroke-linecap="round" filter="url(#glow)">
+    <path d="M22 67h7l4-12 6 25 6-18 6 8 5-3h16l5-12 6 25 6-18 6 8 5-3h6" stroke-width="3"/>
+  </g>
+  <circle cx="106" cy="27" r="4" fill="#64e6b3"/>
 </svg>

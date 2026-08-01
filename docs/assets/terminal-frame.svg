@@ -1,37 +1,56 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 570" role="img" aria-labelledby="title desc">
-  <title id="title">ASCII Media Player terminal preview</title>
-  <desc id="desc">A dark terminal window containing an animated-looking audio spectrum made from text characters</desc>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 590" role="img" aria-labelledby="title desc">
+  <title id="title">ASCII Media Player terminal interface</title>
+  <desc id="desc">A dark terminal window showing a cyan ASCII spectrum and playback information.</desc>
   <defs>
-    <linearGradient id="frame" x1="0" y1="0" x2="1" y2="1">
-      <stop stop-color="#18232e"/>
-      <stop offset="1" stop-color="#0a0f15"/>
+    <linearGradient id="frame" x1="0" y1="0" x2="1200" y2="590" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#111f2d"/>
+      <stop offset="1" stop-color="#081019"/>
     </linearGradient>
-    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
-      <feGaussianBlur stdDeviation="5" result="b"/>
+    <linearGradient id="accent" x1="210" y1="170" x2="1000" y2="470" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c9f4ff"/>
+      <stop offset=".5" stop-color="#70d8ff"/>
+      <stop offset="1" stop-color="#718dff"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-30%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="24" stdDeviation="28" flood-color="#000" flood-opacity=".45"/>
+    </filter>
+    <filter id="glow" x="-20%" y="-80%" width="140%" height="260%">
+      <feGaussianBlur stdDeviation="7" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <rect x="18" y="24" width="724" height="520" rx="18" fill="#05080c" stroke="url(#frame)" stroke-width="8"/>
-  <rect x="28" y="34" width="704" height="54" rx="10" fill="#101720"/>
-  <circle cx="56" cy="61" r="6" fill="none" stroke="#556372"/>
-  <circle cx="78" cy="61" r="6" fill="none" stroke="#556372"/>
-  <circle cx="100" cy="61" r="6" fill="none" stroke="#556372"/>
-  <text x="380" y="66" text-anchor="middle" fill="#8d9aaa" font-family="monospace" font-size="14" letter-spacing="2">ASCII MEDIA PLAYER</text>
-  <text x="68" y="130" fill="#57e6ff" font-family="monospace" font-size="17">NOW PLAYING  signal_memory.flac</text>
-  <text x="68" y="159" fill="#8d9aaa" font-family="monospace" font-size="14">01:27 / 03:54      VOL [##############----] 78%</text>
-  <g fill="#57e6ff" font-family="monospace" font-size="16" filter="url(#glow)">
-    <text x="74" y="220">                    .       .                       </text>
-    <text x="74" y="244">      .       .   : : .   . :       .       .       </text>
-    <text x="74" y="268">  .  : :  .  :;::;:;::...:;:  .  : :  .  : : .   </text>
-    <text x="74" y="292"> .:.:ir:.:;:irXXAAXXi;;irA2;:.:;:ir:.:;:ir:;:.   </text>
-    <text x="74" y="316">:iXA253irXA25hMHGS#9B&amp;@B9#SGMh52AXri352AXriXA253:</text>
-    <text x="74" y="340">XA25hMHGS#9B&amp;@@@@@@@@@@@&amp;B9#SGMh52AXriXA25hMHGS#</text>
-    <text x="74" y="364">hMHGS#9B&amp;@@@@@@@@@@@@@@@@@@@@@&amp;B9#SGMhMHGS#9B&amp;@@</text>
-    <text x="74" y="388">GS#9B&amp;@@@@@@@@@@@@@@@@@@@@@@@@@@@@@&amp;B9#GS#9B&amp;@@@</text>
+  <rect width="1200" height="590" rx="34" fill="#05090d"/>
+  <g filter="url(#shadow)">
+    <rect x="40" y="38" width="1120" height="514" rx="24" fill="url(#frame)" stroke="#284157" stroke-width="2"/>
+    <path d="M40 100h1120" stroke="#284157"/>
+    <circle cx="78" cy="69" r="7" fill="#182b3b" stroke="#4b687d"/>
+    <circle cx="102" cy="69" r="7" fill="#182b3b" stroke="#4b687d"/>
+    <circle cx="126" cy="69" r="7" fill="#182b3b" stroke="#4b687d"/>
+    <text x="600" y="74" text-anchor="middle" fill="#6f8799" font-family="ui-monospace, monospace" font-size="14" letter-spacing="2">ASCII MEDIA PLAYER / LIVE SIGNAL</text>
+    <text x="1098" y="74" text-anchor="end" fill="#64e6b3" font-family="ui-monospace, monospace" font-size="12">PLAYING</text>
   </g>
-  <rect x="68" y="432" width="620" height="9" rx="4.5" fill="#1b2632"/>
-  <rect x="68" y="432" width="343" height="9" rx="4.5" fill="#b8ff5a"/>
-  <text x="68" y="486" fill="#8d9aaa" font-family="monospace" font-size="13">SPACE PAUSE  N/P TRACK  ARROWS SEEK/VOLUME  M MUTE  Q QUIT</text>
-  <path d="M612 112h75" stroke="#b8ff5a" stroke-width="2"/>
-  <text x="650" y="104" text-anchor="middle" fill="#b8ff5a" font-family="monospace" font-size="11">LIVE</text>
+  <g font-family="ui-monospace, monospace">
+    <text x="78" y="139" fill="#70d8ff" font-size="13" letter-spacing="2">NOW PLAYING</text>
+    <text x="78" y="166" fill="#eef7ff" font-size="21" font-weight="700">Midnight Signal.flac</text>
+    <text x="78" y="191" fill="#70889b" font-size="12">03 / 12 · FLAC · LOCAL CACHE READY</text>
+  </g>
+  <rect x="76" y="220" width="1048" height="244" rx="14" fill="#03080c" stroke="#1d3a4e"/>
+  <g opacity=".16" stroke="#70d8ff">
+    <path d="M76 260h1048M76 300h1048M76 340h1048M76 380h1048M76 420h1048"/>
+    <path d="M156 220v244M236 220v244M316 220v244M396 220v244M476 220v244M556 220v244M636 220v244M716 220v244M796 220v244M876 220v244M956 220v244M1036 220v244"/>
+  </g>
+  <g fill="url(#accent)" filter="url(#glow)" opacity=".95">
+    <path d="M94 436v-18h12v18h-12Zm18 0v-34h12v34h-12Zm18 0v-52h12v52h-12Zm18 0v-82h12v82h-12Zm18 0v-62h12v62h-12Zm18 0v-104h12v104h-12Zm18 0v-146h12v146h-12Zm18 0v-112h12v112h-12Zm18 0v-168h12v168h-12Zm18 0v-132h12v132h-12Zm18 0v-96h12v96h-12Zm18 0v-64h12v64h-12Zm18 0v-88h12v88h-12Zm18 0v-126h12v126h-12Zm18 0v-184h12v184h-12Zm18 0v-212h12v212h-12Zm18 0v-176h12v176h-12Zm18 0v-136h12v136h-12Zm18 0v-104h12v104h-12Zm18 0v-82h12v82h-12Zm18 0v-118h12v118h-12Zm18 0v-154h12v154h-12Zm18 0v-194h12v194h-12Zm18 0v-220h12v220h-12Zm18 0v-178h12v178h-12Zm18 0v-148h12v148h-12Zm18 0v-108h12v108h-12Zm18 0v-76h12v76h-12Zm18 0v-96h12v96h-12Zm18 0v-134h12v134h-12Zm18 0v-174h12v174h-12Zm18 0v-202h12v202h-12Zm18 0v-166h12v166h-12Zm18 0v-124h12v124h-12Zm18 0v-92h12v92h-12Zm18 0v-60h12v60h-12Zm18 0v-84h12v84h-12Zm18 0v-116h12v116h-12Zm18 0v-158h12v158h-12Zm18 0v-188h12v188h-12Zm18 0v-142h12v142h-12Zm18 0v-110h12v110h-12Zm18 0v-80h12v80h-12Zm18 0v-54h12v54h-12Zm18 0v-72h12v72h-12Zm18 0v-96h12v96h-12Zm18 0v-126h12v126h-12Zm18 0v-96h12v96h-12Zm18 0v-64h12v64h-12Zm18 0v-42h12v42h-12"/>
+  </g>
+  <g font-family="ui-monospace, monospace" font-size="12">
+    <text x="78" y="506" fill="#6f8799">01:42</text>
+    <rect x="128" y="497" width="858" height="4" rx="2" fill="#1e3445"/>
+    <rect x="128" y="497" width="386" height="4" rx="2" fill="#70d8ff"/>
+    <circle cx="514" cy="499" r="6" fill="#c9f4ff"/>
+    <text x="1028" y="506" fill="#6f8799">04:03</text>
+    <text x="78" y="530" fill="#70d8ff">SPACE</text><text x="127" y="530" fill="#6f8799">pause</text>
+    <text x="205" y="530" fill="#70d8ff">N/P</text><text x="240" y="530" fill="#6f8799">track</text>
+    <text x="312" y="530" fill="#70d8ff">ARROWS</text><text x="373" y="530" fill="#6f8799">seek / volume</text>
+    <text x="1042" y="530" fill="#64e6b3">VOL 75%</text>
+  </g>
 </svg>

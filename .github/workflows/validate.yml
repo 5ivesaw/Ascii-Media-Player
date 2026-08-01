@@ -1,0 +1,23 @@
+name: Validate project
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Validate Python and website files
+        run: |
+          python3 scripts/validate-project.py
+          node --check docs/player.js
+          node --check docs/sw.js

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">ASCII Media Player</title>
+  <desc id="desc">Local audio rendered as a live ASCII signal.</desc>
+  <defs>
+    <radialGradient id="r" cx="0" cy="0" r="1" gradientTransform="translate(945 80) rotate(132) scale(750 650)" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#14364b"/>
+      <stop offset=".46" stop-color="#08131d"/>
+      <stop offset="1" stop-color="#05090d"/>
+    </radialGradient>
+    <linearGradient id="g" x1="94" y1="99" x2="1070" y2="560" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c9f4ff"/>
+      <stop offset=".55" stop-color="#70d8ff"/>
+      <stop offset="1" stop-color="#718dff"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-100%" width="160%" height="300%">
+      <feGaussianBlur stdDeviation="10" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+  <rect width="1200" height="630" fill="url(#r)"/>
+  <path d="M0 538h1200M0 498h1200M0 458h1200M0 418h1200M0 378h1200M0 338h1200M0 298h1200M0 258h1200M0 218h1200" stroke="#70d8ff" opacity=".055"/>
+  <g transform="translate(84 77)">
+    <rect width="78" height="78" rx="19" fill="#071018" stroke="#28465b" stroke-width="2"/>
+    <path d="M14 49h7l4-14 6 28 6-21 6 10 6-3h13" fill="none" stroke="#70d8ff" stroke-width="3" stroke-linecap="round"/>
+    <path d="M22 63 36 16h7l14 47h-8l-3-10H32l-3 10h-7Zm13-18h9l-4.5-15L35 45Z" fill="url(#g)"/>
+  </g>
+  <text x="84" y="245" fill="#eef7ff" font-family="ui-sans-serif, system-ui, sans-serif" font-size="78" font-weight="750" letter-spacing="-4">ASCII Media Player</text>
+  <text x="89" y="300" fill="#91a5b6" font-family="ui-monospace, monospace" font-size="22" letter-spacing="4">LOCAL AUDIO / LIVE ASCII / ZERO ACCOUNT</text>
+  <g fill="url(#g)" filter="url(#glow)" opacity=".9">
+    <path d="M84 512v-28h12v28H84Zm20 0v-52h12v52h-12Zm20 0v-88h12v88h-12Zm20 0v-126h12v126h-12Zm20 0v-76h12v76h-12Zm20 0v-146h12v146h-12Zm20 0v-184h12v184h-12Zm20 0v-116h12v116h-12Zm20 0v-216h12v216h-12Zm20 0v-164h12v164h-12Zm20 0v-102h12v102h-12Zm20 0v-74h12v74h-12Zm20 0v-132h12v132h-12Zm20 0v-178h12v178h-12Zm20 0v-232h12v232h-12Zm20 0v-188h12v188h-12Zm20 0v-142h12v142h-12Zm20 0v-104h12v104h-12Zm20 0v-78h12v78h-12Zm20 0v-126h12v126h-12Zm20 0v-176h12v176h-12Zm20 0v-218h12v218h-12Zm20 0v-164h12v164h-12Zm20 0v-116h12v116h-12Zm20 0v-82h12v82h-12Zm20 0v-62h12v62h-12Zm20 0v-96h12v96h-12Zm20 0v-138h12v138h-12Zm20 0v-184h12v184h-12Zm20 0v-148h12v148h-12Zm20 0v-106h12v106h-12Zm20 0v-76h12v76h-12Zm20 0v-116h12v116h-12Zm20 0v-162h12v162h-12Zm20 0v-202h12v202h-12Zm20 0v-152h12v152h-12Zm20 0v-108h12v108h-12Zm20 0v-78h12v78h-12Zm20 0v-54h12v54h-12"/>
+  </g>
+  <rect x="84" y="564" width="1032" height="1" fill="#29465b"/>
+  <text x="84" y="596" fill="#70889b" font-family="ui-monospace, monospace" font-size="16">WINDOWS · LINUX · ANDROID PWA</text>
+  <text x="1116" y="596" text-anchor="end" fill="#70d8ff" font-family="ui-monospace, monospace" font-size="16">OPEN SOURCE</text>
+</svg>

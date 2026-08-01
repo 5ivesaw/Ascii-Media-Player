@@ -1,19 +1,49 @@
 {
+  "id": "./",
   "name": "ASCII Media Player",
   "short_name": "ASCII Player",
-  "description": "Local-first audio playback with a live ASCII spectrum visualizer.",
-  "start_url": "./",
+  "description": "Play local audio through a real-time ASCII spectrum. No upload and no account required.",
+  "start_url": "./?source=pwa",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#070a0f",
-  "theme_color": "#070a0f",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "background_color": "#05090d",
+  "theme_color": "#071018",
   "orientation": "any",
+  "categories": ["music", "entertainment", "utilities"],
   "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "assets/maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
     {
       "src": "assets/logo.svg",
       "sizes": "any",
       "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Open player",
+      "short_name": "Player",
+      "description": "Open the local ASCII audio player",
+      "url": "./#player",
+      "icons": [{"src": "assets/icon-192.png", "sizes": "192x192", "type": "image/png"}]
     }
   ]
 }

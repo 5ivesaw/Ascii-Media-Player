@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://5ivesaw.github.io/Ascii-Media-Player/sitemap.xml

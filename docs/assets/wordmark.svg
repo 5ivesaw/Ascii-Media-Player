@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 430 58" role="img" aria-labelledby="title">
+  <title id="title">ASCII Media Player</title>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="430" y2="58" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#c9f4ff"/>
+      <stop offset=".45" stop-color="#70d8ff"/>
+      <stop offset="1" stop-color="#718dff"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" stroke="url(#g)" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="2" y="2" width="54" height="54" rx="13" fill="#071018" stroke="#29465c" stroke-width="2"/>
+    <path d="M12 36h5l3-10 4 20 4-15 4 7 4-2h8" stroke-width="2.4"/>
+    <path d="M17 45 27 14h5l10 31h-6l-2-7H24l-2 7h-5Zm9-13h6l-3-10-3 10Z" fill="url(#g)" stroke="none"/>
+  </g>
+  <text x="73" y="27" fill="#eef7ff" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="18" font-weight="700" letter-spacing="2.1">ASCII MEDIA PLAYER</text>
+  <text x="74" y="45" fill="#70889b" font-family="ui-monospace, SFMono-Regular, Menlo, Consolas, monospace" font-size="8" letter-spacing="3.2">LOCAL SIGNAL ENGINE</text>
+</svg>
